@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Poppins", sans-serif;
  
+}
+
+.bg-register{
+  background: linear-gradient(115deg, #ffffff, #fff1ba, #ffffff);
+  height: 100vh;
+  width: 100%;
+}
+
+.Register-text{
+  /* font-family: "Lobster", sans-serif; */
+  font-family: "Great Vibes", cursive;
+font-weight: 700;
 }
