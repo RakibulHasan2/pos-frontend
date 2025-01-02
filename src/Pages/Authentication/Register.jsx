@@ -3,8 +3,10 @@ import React, { useState } from 'react';
 import { FaEye, FaEyeSlash, FaLock, FaPhone, FaUser } from 'react-icons/fa';
 import { RiShieldUserFill } from 'react-icons/ri';
 import { SiGmail } from 'react-icons/si';
+import { NavLink, useNavigate } from 'react-router';
 
 export default function Register() {
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -32,17 +34,20 @@ export default function Register() {
 
             if (response.ok) {
                 const data = await response.json();
-                alert('User created successfully!');
+                alert(`${data?.message}`);
                 console.log('Response:', data);
+                localStorage.setItem('user', JSON.stringify(data.user._id)); // Save user info
+                navigate("/")
             } else {
                 const errorData = await response.json();
-                alert(`Error: ${errorData.message}`);
+                alert(`${errorData.message}`);
             }
         } catch (error) {
             console.error('Error:', error);
             alert('An error occurred while creating the user.');
         }
     };
+    
 
     return (
         <div className='bg-register flex justify-center items-center'>
@@ -174,7 +179,7 @@ export default function Register() {
                 </div>
                 <div className='flex justify-center'>
                     <small>Already have an account?</small>
-                    <small className='text-blue-500 underline ml-2'>Login</small>
+                   <NavLink to="/login"><small className='text-blue-500 underline ml-2'>Login</small></NavLink> 
                 </div>
             </form>
         </div>
