@@ -3,7 +3,7 @@
 @tailwind utilities;
 :root {
   font-family: "Poppins", sans-serif;
- 
+ background: #191919;
 }
 
 .bg-register{
@@ -16,4 +16,23 @@
   /* font-family: "Lobster", sans-serif; */
   font-family: "Great Vibes", cursive;
 font-weight: 700;
+}
+
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px; /* Adjust the width */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1; /* Customize scrollbar color */
+  border-radius: 8px; /* Rounded edges */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1aa; /* Darker color on hover */
+}
+
+::-webkit-scrollbar-track {
+  background: #f9fafb; /* Background of scrollbar track */
 }
