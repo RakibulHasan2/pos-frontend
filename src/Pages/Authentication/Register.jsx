@@ -36,8 +36,8 @@ export default function Register() {
                 const data = await response.json();
                 alert(`${data?.message}`);
                 console.log('Response:', data);
-                localStorage.setItem('user', JSON.stringify(data.user._id)); // Save user info
-                navigate("/")
+                localStorage.setItem('user', JSON.stringify(data.user)); // Save user info
+                navigate("/dashboard");
             } else {
                 const errorData = await response.json();
                 alert(`${errorData.message}`);
