@@ -29,13 +29,13 @@ export default function Login() {
         },
         body: JSON.stringify(formData),
       });
-
+  
       if (response.ok) {
         const data = await response.json();
         alert(`${data?.message || 'Login successful!'}`);
         console.log('Response:', data);
-        localStorage.setItem('user', JSON.stringify(data.user)); // Save user info
-        navigate('/'); // Redirect to a dashboard or home page
+        localStorage.setItem('user', JSON.stringify(data.user)); // Save user info in local storage
+        navigate('/dashboard'); // Redirect to a dashboard or home page
       } else {
         const errorData = await response.json();
         alert(`${errorData?.message || 'Login failed. Please try again.'}`);
@@ -46,7 +46,7 @@ export default function Login() {
       alert('An error occurred while logging in.');
     }
   };
-
+  
   return (
     <div className="bg-register flex justify-center items-center">
       <form
