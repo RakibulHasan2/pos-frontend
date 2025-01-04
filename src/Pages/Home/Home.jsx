@@ -9,7 +9,7 @@ export default function Home() {
       return <FinalLoader />;
   }
   return (
-    <div className='pl-64'>
+    <div className=''>
       <div>
         <CommonTopNab/>
       </div>

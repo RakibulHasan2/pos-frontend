@@ -6,7 +6,7 @@ import { MdOutlineArrowDropDown } from 'react-icons/md';
 import { IoSunnyOutline } from 'react-icons/io5';
 import { AiOutlineFullscreenExit } from 'react-icons/ai';
 import toast from 'react-hot-toast';
-import {  useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 
 export default function CommonTopNab() {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
@@ -23,21 +23,28 @@ export default function CommonTopNab() {
     console.log('User logged out successfully.')
 
     alert('User logged out successfully.');
-  navigate('/login');
+    navigate('/login');
   };
 
   return (
-    <div className='w-full h-16 border flex items-center justify-end gap-5 pr-5'>
+    <div className='w-full h-16 border flex items-center justify-between gap-5 pr-5'>
 
-      <button className='flex items-center  px-2 py-2 rounded-xl transition-all duration-300 hover:bg-blue-100'>
-        <AiOutlineFullscreenExit className='text-2xl' />
-      </button>
-      <button className='flex items-center  px-2 py-2 rounded-xl transition-all duration-300 hover:bg-blue-100'>
-        <IoSunnyOutline className='text-2xl' />
-      </button>
-      <button className='flex items-center  px-2 py-2 rounded-xl transition-all duration-300 hover:bg-blue-100' onClick={toggleSideMenu}>
-        <CiUser className='text-2xl' />  {user?.role} <MdOutlineArrowDropDown />
-      </button>
+      <p className='ml-5 uppercase text-3xl font-semibold text-blue-600'>
+        Welcome {user?.name}
+      </p>
+      <div className='flex gap-8'>
+        <button className='flex items-center  px-2 py-2 rounded-xl transition-all duration-300 hover:bg-blue-100'>
+          <AiOutlineFullscreenExit className='text-2xl' />
+        </button>
+        <button className='flex items-center  px-2 py-2 rounded-xl transition-all duration-300 hover:bg-blue-100'>
+          <IoSunnyOutline className='text-2xl' />
+        </button>
+        <button className='flex items-center  px-2 py-2 rounded-xl transition-all duration-300 hover:bg-blue-100' onClick={toggleSideMenu}>
+          <CiUser className='text-2xl' />  {user?.role} <MdOutlineArrowDropDown />
+        </button>
+      </div>
+
+
 
 
       {/* side  menu bar start*/}

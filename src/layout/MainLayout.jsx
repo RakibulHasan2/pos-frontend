@@ -10,7 +10,7 @@ const MainLayout = () => {
     <div>
       {user ? <div className="flex">
         <Navbar />
-        <main className="border border-red-300 w-full">
+        <main className="border border-red-300 w-full ml-64">
           <Outlet />  
         </main>
       </div> : <><Login/></>}

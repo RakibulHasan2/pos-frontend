@@ -14,6 +14,7 @@ export default function Navbar() {
   console.log(user)
   const menuItems = [
     { id: "dashboard", text: "Dashboard", icon: <AiOutlineDashboard size={20} />, path: "/dashboard" },
+    { id: "dashboard", text: "Add product", icon: <AiOutlineDashboard size={20} />, path: "/addProduct" },
     {
       id: "settings",
       text: "Settings",
