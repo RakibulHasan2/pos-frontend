@@ -4,7 +4,7 @@ import CommonTopNab from '../../Shared/CommonTopNav/CommonTopNab'
 
 export default function AddProduct() {
   return (
-    <div>
+    <div className=''>
       <div>
         <CommonTopNab />
       </div>
