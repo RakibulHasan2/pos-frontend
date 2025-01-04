@@ -27,7 +27,7 @@ export default function CommonTopNab() {
   };
 
   return (
-    <div className='w-full h-16 border flex items-center justify-between gap-5 pr-5'>
+    <div className='w-full h-16 border-b flex items-center justify-between gap-5 pr-5'>
 
       <p className='ml-5 uppercase text-3xl font-semibold text-blue-600'>
         Welcome {user?.name}
