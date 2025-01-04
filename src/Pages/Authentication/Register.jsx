@@ -4,6 +4,7 @@ import { FaEye, FaEyeSlash, FaLock, FaPhone, FaUser } from 'react-icons/fa';
 import { RiShieldUserFill } from 'react-icons/ri';
 import { SiGmail } from 'react-icons/si';
 import { NavLink, useNavigate } from 'react-router';
+import { toast, ToastContainer } from 'react-toastify';
 
 export default function Register() {
     const navigate = useNavigate()
@@ -40,14 +41,14 @@ export default function Register() {
                 navigate("/dashboard");
             } else {
                 const errorData = await response.json();
-                alert(`${errorData.message}`);
+                toast.error(`${errorData.message}`);
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('An error occurred while creating the user.');
+            toast.error('An error occurred while creating the user.');
         }
     };
-    
+
 
     return (
         <div className='bg-register flex justify-center items-center'>
@@ -165,12 +166,27 @@ export default function Register() {
                 </div>
 
                 {/* Submit Button */}
-                <button
-                    type="submit"
-                    className="w-full bg-[#fcda6c] hover:bg-[#f5e091] transition-all duration-300 font-bold py-2 px-4 rounded-3xl"
-                >
-                    Register
-                </button>
+                <div>
+                    <button
+                        type="submit"
+                        className="w-full bg-[#fcda6c] hover:bg-[#f5e091] transition-all duration-300 font-bold py-2 px-4 rounded-3xl"
+                    >
+                        Register
+                    </button>
+                    <ToastContainer
+                        position="top-right"
+                        autoClose={5000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick={false}
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                        theme="light"
+                    />
+                </div>
+
 
                 <div className='flex items-center gap-3 justify-center mt-0'>
                     <div className='w-[100px] h-[2px] bg-white'></div>
@@ -179,7 +195,7 @@ export default function Register() {
                 </div>
                 <div className='flex justify-center'>
                     <small>Already have an account?</small>
-                   <NavLink to="/login"><small className='text-blue-500 underline ml-2'>Login</small></NavLink> 
+                    <NavLink to="/login"><small className='text-blue-500 underline ml-2'>Login</small></NavLink>
                 </div>
             </form>
         </div>

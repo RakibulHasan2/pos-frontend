@@ -1,12 +1,13 @@
-// eslint-disable-next-line no-unused-vars
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FaEye, FaEyeSlash, FaLock } from 'react-icons/fa';
 import { RiShieldUserFill } from 'react-icons/ri';
 import { SiGmail } from 'react-icons/si';
 import { NavLink, useNavigate } from 'react-router';
-
+import { toast, ToastContainer } from 'react-toastify';
 export default function Login() {
   const navigate = useNavigate();
+
+
   const [formData, setFormData] = useState({
     email: '',
     role: '',
@@ -29,7 +30,7 @@ export default function Login() {
         },
         body: JSON.stringify(formData),
       });
-  
+
       if (response.ok) {
         const data = await response.json();
         alert(`${data?.message || 'Login successful!'}`);
@@ -38,15 +39,15 @@ export default function Login() {
         navigate('/dashboard'); // Redirect to a dashboard or home page
       } else {
         const errorData = await response.json();
-        alert(`${errorData?.message || 'Login failed. Please try again.'}`);
+        toast.error(`${errorData?.message || 'Login failed. Please try again.'}`);
         console.log('Error:', errorData);
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('An error occurred while logging in.');
+      toast.error('An error occurred while logging in.');
     }
   };
-  
+
   return (
     <div className="bg-register flex justify-center items-center">
       <form
@@ -125,12 +126,26 @@ export default function Login() {
         </div>
 
         {/* Submit Button */}
-        <button
+        <div><button
           type="submit"
           className="w-full bg-[#fcda6c] hover:bg-[#f5e091] transition-all duration-300 font-bold py-2 px-4 rounded-3xl"
         >
           Login
         </button>
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
+        </div>
+
 
         <div className="flex justify-center mt-2">
           <small>Don&apos;t have an account?</small>

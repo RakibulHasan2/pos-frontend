@@ -5,6 +5,7 @@ import NotFound from "../Shared/notFound/NotFound";
 import Register from "../Pages/Authentication/Register";
 import Login from "../Pages/Authentication/Login";
 import AddProduct from "../Pages/AddProduct/AddProduct";
+import AllProducts from "../Pages/AllProducts/AllProducts";
 
 const routes = createBrowserRouter([
     {
@@ -18,6 +19,10 @@ const routes = createBrowserRouter([
             {
                 path: '/addProduct',
                 element:<AddProduct/>,
+            },
+            {
+                path: '/allProducts',
+                element:<AllProducts/>,
             },
             {
                 path: '*',
