@@ -4,6 +4,7 @@ import Home from "../Pages/Home/Home";
 import NotFound from "../Shared/notFound/NotFound";
 import Register from "../Pages/Authentication/Register";
 import Login from "../Pages/Authentication/Login";
+import AddProduct from "../Pages/AddProduct/AddProduct";
 
 const routes = createBrowserRouter([
     {
@@ -11,8 +12,12 @@ const routes = createBrowserRouter([
         element: <App />,
         children: [
             {
-                path: '/home',
+                path: '/dashboard',
                 element:<Home/>,
+            },
+            {
+                path: '/addProduct',
+                element:<AddProduct/>,
             },
             {
                 path: '*',
