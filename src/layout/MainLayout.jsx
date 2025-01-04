@@ -6,12 +6,12 @@ const MainLayout = () => {
 
   return (
     <div>
-       
-        <Navbar/>
-        <main>
-          <Outlet/>  
-        </main>
-        
+
+      <Navbar />
+      <main>
+        <Outlet />
+      </main>
+
     </div>
   );
 };
