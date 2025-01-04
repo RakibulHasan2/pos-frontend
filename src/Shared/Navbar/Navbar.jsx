@@ -7,7 +7,7 @@ import { AiOutlineDashboard, AiOutlineProduct, AiOutlineSetting } from "react-ic
 import { FiUser } from "react-icons/fi";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import useUser from "../getUser/GetUser";
-import { MdFormatListBulletedAdd } from "react-icons/md";
+import { MdFormatListBulletedAdd, MdOutlinePlaylistAddCheck } from "react-icons/md";
 
 export default function Navbar() {
   const [expanded, setExpanded] = useState(true);
@@ -22,7 +22,7 @@ export default function Navbar() {
       icon: <AiOutlineProduct  size={20} />,
       submenu: [
         { id: "AddProduct", text: "Add Product", icon: <MdFormatListBulletedAdd size={16} />, path: "/addProduct" },
-        { id: "submenu2", text: "Submenu 2", icon: <FiUser size={16} />, path: "/settings/submenu2" },
+        { id: "AllProducts", text: "All Products", icon: <MdOutlinePlaylistAddCheck size={18} />, path: "/allProducts" },
       ],
     },
     {

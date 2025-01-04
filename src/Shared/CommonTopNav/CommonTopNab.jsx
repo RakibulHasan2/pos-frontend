@@ -5,8 +5,8 @@ import useUser from '../getUser/GetUser';
 import { MdOutlineArrowDropDown } from 'react-icons/md';
 import { IoSunnyOutline } from 'react-icons/io5';
 import { AiOutlineFullscreenExit } from 'react-icons/ai';
-import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router';
+import { toast, ToastContainer } from 'react-toastify';
 
 export default function CommonTopNab() {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
@@ -20,9 +20,6 @@ export default function CommonTopNab() {
     // Clear user data from sessionStorage
     localStorage.removeItem('user');
     toast.success('Logged out successfully.')
-    console.log('User logged out successfully.')
-
-    alert('User logged out successfully.');
     navigate('/login');
   };
 
@@ -72,9 +69,24 @@ export default function CommonTopNab() {
           <button className='flex items-center hover:text-blue-600 transition-all duration-300 h-16 border-b w-full pl-5'>
             <CiSettings className='text-2xl' /> Settings
           </button>
-          <button onClick={handleLogout} className='flex items-center hover:text-red-600 transition-all duration-300 h-16 border-b w-full pl-5'>
+          <div>
+             <button onClick={handleLogout} className='flex items-center hover:text-red-600 transition-all duration-300 h-16 border-b w-full pl-5'>
             <CiPower className='text-2xl' /> Logout
           </button>
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
+          </div>
+         
         </div>
       </div>
       {/* side  menu bar end*/}

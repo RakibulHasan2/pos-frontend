@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import CommonTopNab from '../../Shared/CommonTopNav/CommonTopNab';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 export default function AddProduct() {
   const imageHosKey = '29473dd4ab78ebc95009722bc0558d38';
@@ -45,10 +46,13 @@ export default function AddProduct() {
         ...prevData,
         p_images: response.data.data.url,
       }));
-      alert('Image uploaded successfully!');
+      toast.success(`Image uploaded successfully!`, {
+        autoClose: 1000,
+        });
+      // alert('Image uploaded successfully!');
     } catch (error) {
       console.error('Error uploading image:', error);
-      alert('Failed to upload image.');
+      toast.error('Failed to upload image.');
     }
   };
 
@@ -58,7 +62,12 @@ export default function AddProduct() {
     try {
       const response = await axios.post('http://localhost:5000/api/products/crateProduct', formData);
       console.log(response.data);
-      alert('Product created successfully!');
+      toast.success(`${response.data.message}`, {
+       
+        autoClose: 3000,
+      
+        });
+      // alert('Product created successfully!');
       setFormData({
         p_name: '',
         p_category: '',
@@ -252,7 +261,7 @@ export default function AddProduct() {
                       Details<span className="text-red-600">*</span>
                     </span>
                   </label>
-                  <input
+                  <textarea
                     required
                     type="text"
                     placeholder="Details"
