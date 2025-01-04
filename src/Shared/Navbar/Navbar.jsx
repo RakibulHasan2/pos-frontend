@@ -3,10 +3,11 @@ import { useState } from "react";
 import { NavLink, useLocation } from "react-router";
 import { CgMoreVertical } from "react-icons/cg";
 import { LuChevronFirst, LuChevronLast } from "react-icons/lu";
-import { AiOutlineDashboard, AiOutlineSetting } from "react-icons/ai";
+import { AiOutlineDashboard, AiOutlineProduct, AiOutlineSetting } from "react-icons/ai";
 import { FiUser } from "react-icons/fi";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import useUser from "../getUser/GetUser";
+import { MdFormatListBulletedAdd, MdOutlinePlaylistAddCheck } from "react-icons/md";
 
 export default function Navbar() {
   const [expanded, setExpanded] = useState(true);
@@ -14,14 +15,14 @@ export default function Navbar() {
   console.log(user)
   const menuItems = [
     { id: "dashboard", text: "Dashboard", icon: <AiOutlineDashboard size={20} />, path: "/dashboard" },
-    { id: "dashboard", text: "Add product", icon: <AiOutlineDashboard size={20} />, path: "/addProduct" },
+    // { id: "dashboard", text: "Add product", icon: <AiOutlineDashboard size={20} />, path: "/addProduct" },
     {
-      id: "settings",
-      text: "Settings",
-      icon: <AiOutlineSetting size={20} />,
+      id: "Products",
+      text: "Products",
+      icon: <AiOutlineProduct  size={20} />,
       submenu: [
-        { id: "submenu1", text: "Submenu 1", icon: <FiUser size={16} />, path: "/settings/submenu1" },
-        { id: "submenu2", text: "Submenu 2", icon: <FiUser size={16} />, path: "/settings/submenu2" },
+        { id: "AddProduct", text: "Add Product", icon: <MdFormatListBulletedAdd size={16} />, path: "/addProduct" },
+        { id: "AllProducts", text: "All Products", icon: <MdOutlinePlaylistAddCheck size={18} />, path: "/allProducts" },
       ],
     },
     {
