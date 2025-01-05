@@ -1,8 +1,10 @@
 
 
+import { ToastContainer } from 'react-toastify'
 import './App.css'
 import MainLayout from './layout/MainLayout'
-import {ToastContainer } from 'react-toastify'
+import { Toaster } from 'react-hot-toast'
+
 
 
 function App() {
@@ -10,6 +12,10 @@ function App() {
 
   return (
     <main>
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+      />
       <MainLayout />
       <ToastContainer
         position="top-right"

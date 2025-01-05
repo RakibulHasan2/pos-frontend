@@ -8,7 +8,7 @@ import { FiUser } from "react-icons/fi";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import useUser from "../getUser/GetUser";
 import { MdFormatListBulletedAdd, MdOutlinePlaylistAddCheck } from "react-icons/md";
-
+import logo from "../../assets/logo/logo.jpg"
 export default function Navbar() {
   const [expanded, setExpanded] = useState(true);
   const user = useUser();
@@ -44,11 +44,13 @@ export default function Navbar() {
           {/* Header */}
           <div className="p-4 pb-2 flex justify-between items-center">
             <img
-              src="https://img.logoipsum.com/243.svg"
-              className={`overflow-hidden transition-all ${expanded ? "w-32" : "w-0"
+              src={logo}
+              className={`overflow-hidden transition-all rounded-xl ${expanded ? "w-12" : "w-12"
                 }`}
               alt="Logo"
             />
+            <p className={`overflow-hidden transition-all text-2xl font-bold rounded-xl ${expanded ? "block" : "hidden"
+                }`}>Positive It</p>
             <button
               onClick={() => setExpanded((curr) => !curr)}
               className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100"
