@@ -34,7 +34,7 @@ export default function Navbar() {
         { id: "contact", text: "Contact", icon: <FiUser size={16} />, path: "/info/contact" },
       ],
     },
-    { id: "profile", text: "Profile", icon: <FiUser size={20} />, path: "/profile" },
+ 
   ];
 
   return (
@@ -84,10 +84,12 @@ export default function Navbar() {
               className={`flex justify-between items-center overflow-hidden transition-all ${expanded ? "w-52 ml-3" : "w-0"
                 }`}
             >
+             <NavLink to="/myProfile">
               <div className="leading-4">
                 <h4 className="font-semibold">{user?.name}</h4>
                 <span className="text-xs text-gray-600">{user?.email}</span>
               </div>
+              </NavLink> 
               <CgMoreVertical size={20} />
             </div>
           </div>

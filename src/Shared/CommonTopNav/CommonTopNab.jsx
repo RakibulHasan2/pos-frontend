@@ -5,7 +5,7 @@ import useUser from '../getUser/GetUser';
 import { MdOutlineArrowDropDown } from 'react-icons/md';
 import { IoSunnyOutline } from 'react-icons/io5';
 import { AiOutlineFullscreenExit } from 'react-icons/ai';
-import { useNavigate } from 'react-router';
+import { NavLink, useNavigate } from 'react-router';
 import { toast, ToastContainer } from 'react-toastify';
 
 export default function CommonTopNab() {
@@ -63,30 +63,32 @@ export default function CommonTopNab() {
 
         {/* Side Menu Content */}
         <div>
-          <button className='flex items-center hover:text-blue-600 transition-all duration-300 h-16 border-b w-full pl-5'>
-            <CiUser className='text-2xl' /> My Profile
-          </button>
+          <NavLink to="/myProfile">
+            <button className='flex items-center hover:text-blue-600 transition-all duration-300 h-16 border-b w-full pl-5'>
+              <CiUser className='text-2xl' /> My Profile
+            </button>
+          </NavLink>
           <button className='flex items-center hover:text-blue-600 transition-all duration-300 h-16 border-b w-full pl-5'>
             <CiSettings className='text-2xl' /> Settings
           </button>
           <div>
-             <button onClick={handleLogout} className='flex items-center hover:text-red-600 transition-all duration-300 h-16 border-b w-full pl-5'>
-            <CiPower className='text-2xl' /> Logout
-          </button>
-          <ToastContainer
-            position="top-right"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick={false}
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-          />
+            <button onClick={handleLogout} className='flex items-center hover:text-red-600 transition-all duration-300 h-16 border-b w-full pl-5'>
+              <CiPower className='text-2xl' /> Logout
+            </button>
+            <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick={false}
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+            />
           </div>
-         
+
         </div>
       </div>
       {/* side  menu bar end*/}
