@@ -8,7 +8,7 @@ import { FiUser } from "react-icons/fi";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import useUser from "../getUser/GetUser";
 import { MdFormatListBulletedAdd, MdOutlinePlaylistAddCheck } from "react-icons/md";
-
+import logo from "../../assets/logo/logo.jpg"
 export default function Navbar() {
   const [expanded, setExpanded] = useState(true);
   const user = useUser();
@@ -34,7 +34,7 @@ export default function Navbar() {
         { id: "contact", text: "Contact", icon: <FiUser size={16} />, path: "/info/contact" },
       ],
     },
-    { id: "profile", text: "Profile", icon: <FiUser size={20} />, path: "/profile" },
+ 
   ];
 
   return (
@@ -44,11 +44,13 @@ export default function Navbar() {
           {/* Header */}
           <div className="p-4 pb-2 flex justify-between items-center">
             <img
-              src="https://img.logoipsum.com/243.svg"
-              className={`overflow-hidden transition-all ${expanded ? "w-32" : "w-0"
+              src={logo}
+              className={`overflow-hidden transition-all rounded-xl ${expanded ? "w-12" : "w-12"
                 }`}
               alt="Logo"
             />
+            <p className={`overflow-hidden transition-all text-2xl font-bold rounded-xl ${expanded ? "block" : "hidden"
+                }`}>Positive It</p>
             <button
               onClick={() => setExpanded((curr) => !curr)}
               className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100"
@@ -82,10 +84,12 @@ export default function Navbar() {
               className={`flex justify-between items-center overflow-hidden transition-all ${expanded ? "w-52 ml-3" : "w-0"
                 }`}
             >
+             <NavLink to="/myProfile">
               <div className="leading-4">
                 <h4 className="font-semibold">{user?.name}</h4>
                 <span className="text-xs text-gray-600">{user?.email}</span>
               </div>
+              </NavLink> 
               <CgMoreVertical size={20} />
             </div>
           </div>
@@ -128,7 +132,7 @@ function NavItem({ icon, text, path, submenu, expanded }) {
       </NavLink>
       {submenu && (
         <div
-          className={`overflow-hidden ml-3 bg-slate-200 transition-all duration-300 ${submenuOpen ? "max-h-screen" : "max-h-0"
+          className={`overflow-hidden pl-3 bg-[#00000007] transition-all duration-300 ${submenuOpen ? "max-h-screen" : "max-h-0"
             }`}
         >
           {submenu.map((subItem) => (

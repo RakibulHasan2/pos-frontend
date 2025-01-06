@@ -1,11 +1,14 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CommonTopNab from '../../Shared/CommonTopNav/CommonTopNab';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
+import useLoader from '../../Shared/Loader/Loader';
+import FinalLoader from '../../Shared/Loader/FinalLoader';
+
 
 export default function AddProduct() {
-  const imageHosKey = '29473dd4ab78ebc95009722bc0558d38';
+  const { loading, online } = useLoader();
   const [formData, setFormData] = useState({
     p_name: '',
     p_category: '',
@@ -18,6 +21,22 @@ export default function AddProduct() {
     p_images: '',
     p_details: '',
   });
+
+  const [category, setCategory] = useState([]);
+const imageHosKey = '29473dd4ab78ebc95009722bc0558d38';
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/category/getCategories');
+        setCategory(response.data.categories);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+  
+    fetchData();
+  }, []);
+  // console.log(category)
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -48,7 +67,7 @@ export default function AddProduct() {
       }));
       toast.success(`Image uploaded successfully!`, {
         autoClose: 1000,
-        });
+      });
       // alert('Image uploaded successfully!');
     } catch (error) {
       console.error('Error uploading image:', error);
@@ -63,10 +82,10 @@ export default function AddProduct() {
       const response = await axios.post('http://localhost:5000/api/products/crateProduct', formData);
       console.log(response.data);
       toast.success(`${response.data.message}`, {
-       
+
         autoClose: 3000,
-      
-        });
+
+      });
       // alert('Product created successfully!');
       setFormData({
         p_name: '',
@@ -85,6 +104,9 @@ export default function AddProduct() {
       alert('Failed to create product.');
     }
   };
+  if (loading || !online) {
+    return <FinalLoader />;
+}
 
   return (
     <div className="">
@@ -133,16 +155,11 @@ export default function AddProduct() {
                     <option disabled selected>
                       Select Category
                     </option>
-                    <option>Processors</option>
-                    <option>Motherboards</option>
-                    <option>RAM</option>
-                    <option>SSD</option>
-                    <option>GPUs</option>
-                    <option>PSUs</option>
-                    <option>Monitors</option>
-                    <option>Keyboards</option>
-                    <option>Gaming Mouse</option>
-                    <option>Laptops</option>
+                    {
+                      category?.map((item) => (
+                        <option key={item._id}>{item.category_name}</option>
+                      ))
+                    }
                   </select>
                 </div>
                 <div>
@@ -254,6 +271,7 @@ export default function AddProduct() {
                     onChange={handleFileUpload}
                     className="w-[320px] input border-[#00000026] border"
                   />
+                  
                 </div>
                 <div className="w-full h-20">
                   <label className="label">
@@ -279,6 +297,7 @@ export default function AddProduct() {
                 >
                   Submit
                 </button>
+                
               </div>
             </form>
           </div>
