@@ -132,7 +132,7 @@ function NavItem({ icon, text, path, submenu, expanded }) {
       </NavLink>
       {submenu && (
         <div
-          className={`overflow-hidden ml-3 bg-slate-200 transition-all duration-300 ${submenuOpen ? "max-h-screen" : "max-h-0"
+          className={`overflow-hidden pl-3 bg-[#00000007] transition-all duration-300 ${submenuOpen ? "max-h-screen" : "max-h-0"
             }`}
         >
           {submenu.map((subItem) => (
