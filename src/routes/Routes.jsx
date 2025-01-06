@@ -7,6 +7,7 @@ import Login from "../Pages/Authentication/Login";
 import AddProduct from "../Pages/AddProduct/AddProduct";
 import AllProducts from "../Pages/AllProducts/AllProducts";
 import MyProfile from "../Pages/MyProfile/MyProfile";
+import Pos from "../Pages/Sale/Pos";
 
 const routes = createBrowserRouter([
     {
@@ -32,6 +33,10 @@ const routes = createBrowserRouter([
             {
                 path: '/myProfile',
                 element:<MyProfile/>,
+            },
+            {
+                path: '/pos',
+                element:<Pos/>,
             },
             {
                 path: '*',
