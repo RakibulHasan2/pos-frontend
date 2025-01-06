@@ -3,9 +3,12 @@ import React, { useEffect, useState } from 'react';
 import CommonTopNab from '../../Shared/CommonTopNav/CommonTopNab';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import useLoader from '../../Shared/Loader/Loader';
+import FinalLoader from '../../Shared/Loader/FinalLoader';
 
 
 export default function AddProduct() {
+  const { loading, online } = useLoader();
   const [formData, setFormData] = useState({
     p_name: '',
     p_category: '',
@@ -101,6 +104,9 @@ const imageHosKey = '29473dd4ab78ebc95009722bc0558d38';
       alert('Failed to create product.');
     }
   };
+  if (loading || !online) {
+    return <FinalLoader />;
+}
 
   return (
     <div className="">

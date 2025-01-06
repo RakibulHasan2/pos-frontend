@@ -7,6 +7,8 @@ import CommonTopNab from "../../Shared/CommonTopNav/CommonTopNab";
 import { CiEdit } from "react-icons/ci";
 import toast from "react-hot-toast";
 import { AiTwotoneDelete } from "react-icons/ai";
+import useLoader from "../../Shared/Loader/Loader";
+import FinalLoader from "../../Shared/Loader/FinalLoader";
 
 export default function AllProducts() {
   const [products, setProducts] = useState([]);
@@ -19,8 +21,8 @@ export default function AllProducts() {
   const [itemsPerPage] = useState(10);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedBrand, setSelectedBrand] = useState("");
-  const [loading, setLoading] = useState(false);
-
+  const [loading1, setLoading1] = useState(false);
+  const { loading, online } = useLoader();
   const imageHosKey = '29473dd4ab78ebc95009722bc0558d38';
   useEffect(() => {
     const fetchData = async () => {
@@ -150,7 +152,7 @@ export default function AllProducts() {
   
       if (response.status === 200) {
         toast.success('Product deleted successfully!');
-        // Remove the deleted product from state without reloading
+        // Remove the deleted product from state without reloading1
         setProducts(products.filter((product) => product._id !== id));
         setFilteredProducts(filteredProducts.filter((product) => product._id !== id));
       }
@@ -161,6 +163,9 @@ export default function AllProducts() {
   };
   
 
+  if (loading || !online) {
+    return <FinalLoader />;
+}
 
   return (
     <div>
@@ -254,13 +259,13 @@ export default function AllProducts() {
                   <div className="w-[10%]">
                     <p>{product?.p_category}</p>
                   </div>
-                  <div className="w-[10%]">
+                  <div className="w-[10%] pl-5">
                     <p>{product?.p_quantity}</p>
                   </div>
-                  <div className="w-[10%]">
+                  <div className="w-[10%] pl-2">
                     <p>{product?.p_price}</p>
                   </div>
-                  <div className="w-[10%]">
+                  <div className="w-[10%] pl-2">
                     <p>{product?.p_cost}</p>
                   </div>
                   <div className="dropdown dropdown-left">
@@ -371,7 +376,7 @@ export default function AllProducts() {
               className="mt-20"
               onSubmit={async (e) => {
                 e.preventDefault();
-                setLoading(true);
+                setLoading1(true);
                 const formData = new FormData(e.target);
 
                 const updatedData = {
@@ -404,7 +409,7 @@ export default function AllProducts() {
                       updatedData.p_images = uploadResult.data.url; // Just assign the image URL (not an array)
                     }
                   } catch (error) {
-                    console.error("Error uploading image:", error);
+                    console.error("Error uploading1 image:", error);
                     toast.error("Image upload failed. Please try again.");
                     return;
                   }
@@ -428,7 +433,7 @@ export default function AllProducts() {
                   if (response.ok) {
                     toast.success("Product updated successfully");
                     document.getElementById("updateModal").close();
-                    setLoading(false);
+                    setLoading1(false);
                     // Optionally refresh product list here
                   } else {
                     toast.error(result.message || "Failed to update product");
@@ -460,7 +465,7 @@ export default function AllProducts() {
                     name="p_category"
                     className="select w-[320px] input border-[#00000026] border"
                   >
-                    <option disabled>{updateProduct?.p_category}</option>
+                    <option defaultValue={updateProduct?.p_category}>{updateProduct?.p_category}</option>
                     {categories?.map((item) => (
                       <option key={item._id}>{item.category_name}</option>
                     ))}
@@ -567,7 +572,7 @@ export default function AllProducts() {
               </div>
               <div className="mt-10">
                 <button type="submit" className="btn btn-primary">
-                  {loading ? (
+                  {loading1 ? (
                     <>
                       <FaSpinner className="animate-spin mr-2" /> Updating...
                     </>
