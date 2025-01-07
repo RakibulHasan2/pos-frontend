@@ -34,10 +34,7 @@ const routes = createBrowserRouter([
                 path: '/myProfile',
                 element:<MyProfile/>,
             },
-            {
-                path: '/pos',
-                element:<Pos/>,
-            },
+           
             {
                 path: '*',
                 element: <NotFound/>,
@@ -51,7 +48,11 @@ const routes = createBrowserRouter([
     {
         path: "/login",
         element: <Login />,
-       }
+       },
+       {
+        path: '/pos',
+        element:<Pos/>,
+    },
 ]);
 
 export default routes;

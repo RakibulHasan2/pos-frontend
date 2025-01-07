@@ -52,7 +52,7 @@ export default function Navbar() {
       <aside className={`h-screen ${expanded ? "w-64" : "w-20"} transition-all`}>
         <nav className="h-full flex flex-col bg-white border-r shadow-sm">
           {/* Header */}
-          <div className="p-4 pb-2 flex justify-between items-center">
+          <div className="p-4 pb-2 flex justify-between items-center border mb-5">
             <img
               src={logo}
               className={`overflow-hidden transition-all rounded-xl ${expanded ? "w-12" : "w-12"
