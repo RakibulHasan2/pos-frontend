@@ -7,6 +7,8 @@ import Login from "../Pages/Authentication/Login";
 import AddProduct from "../Pages/AddProduct/AddProduct";
 import AllProducts from "../Pages/AllProducts/AllProducts";
 import MyProfile from "../Pages/MyProfile/MyProfile";
+import Pos from "../Pages/Sale/Pos";
+import AddCategory from "../Pages/AddCategory/AddCategory";
 
 const routes = createBrowserRouter([
     {
@@ -22,6 +24,10 @@ const routes = createBrowserRouter([
                 element:<Home/>,
             },
             {
+                path: '/addCategory',
+                element:<AddCategory/>,
+            },
+            {
                 path: '/addProduct',
                 element:<AddProduct/>,
             },
@@ -33,6 +39,7 @@ const routes = createBrowserRouter([
                 path: '/myProfile',
                 element:<MyProfile/>,
             },
+           
             {
                 path: '*',
                 element: <NotFound/>,
@@ -46,7 +53,11 @@ const routes = createBrowserRouter([
     {
         path: "/login",
         element: <Login />,
-       }
+       },
+       {
+        path: '/pos',
+        element:<Pos/>,
+    },
 ]);
 
 export default routes;

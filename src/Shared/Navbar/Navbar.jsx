@@ -5,14 +5,15 @@ import { CgMoreVertical } from "react-icons/cg";
 import { LuChevronFirst, LuChevronLast } from "react-icons/lu";
 import { AiOutlineDashboard, AiOutlineProduct, AiOutlineSetting } from "react-icons/ai";
 import { FiUser } from "react-icons/fi";
-import { BsChevronDown, BsChevronUp } from "react-icons/bs";
+import { BsChevronDown, BsChevronUp, BsFileEarmarkPost } from "react-icons/bs";
 import useUser from "../getUser/GetUser";
 import { MdFormatListBulletedAdd, MdOutlinePlaylistAddCheck } from "react-icons/md";
 import logo from "../../assets/logo/logo.jpg"
+import { CiShoppingCart } from "react-icons/ci";
 export default function Navbar() {
   const [expanded, setExpanded] = useState(true);
   const user = useUser();
-  console.log(user)
+  // console.log(user)
   const menuItems = [
     { id: "dashboard", text: "Dashboard", icon: <AiOutlineDashboard size={20} />, path: "/dashboard" },
     // { id: "dashboard", text: "Add product", icon: <AiOutlineDashboard size={20} />, path: "/addProduct" },
@@ -21,8 +22,18 @@ export default function Navbar() {
       text: "Products",
       icon: <AiOutlineProduct  size={20} />,
       submenu: [
+        { id: "AddCategory", text: "Category", icon: <MdFormatListBulletedAdd size={16} />, path: "/addCategory" },
         { id: "AddProduct", text: "Add Product", icon: <MdFormatListBulletedAdd size={16} />, path: "/addProduct" },
         { id: "AllProducts", text: "All Products", icon: <MdOutlinePlaylistAddCheck size={18} />, path: "/allProducts" },
+      ],
+    },
+    {
+      id: "sale",
+      text: "Sale",
+      icon: <CiShoppingCart size={20} />,
+      submenu: [
+        { id: "pos", text: "POS", icon: <BsFileEarmarkPost size={16} />, path: "/pos" },
+        { id: "AllProducts", text: "All Products", icon: <MdOutlinePlaylistAddCheck size={18} />, path: "" },
       ],
     },
     {
@@ -42,7 +53,7 @@ export default function Navbar() {
       <aside className={`h-screen ${expanded ? "w-64" : "w-20"} transition-all`}>
         <nav className="h-full flex flex-col bg-white border-r shadow-sm">
           {/* Header */}
-          <div className="p-4 pb-2 flex justify-between items-center">
+          <div className="p-4 pb-2 flex justify-between items-center border mb-5">
             <img
               src={logo}
               className={`overflow-hidden transition-all rounded-xl ${expanded ? "w-12" : "w-12"
