@@ -3,13 +3,17 @@ import CommonTopNab from "../../Shared/CommonTopNav/CommonTopNab";
 import toast from "react-hot-toast";
 import useGetData from "../../Hooks/useGetData";
 import axios from "axios";
+import { FaCaretRight } from "react-icons/fa";
+// import { CiEdit } from "react-icons/ci";
+import { AiTwotoneDelete } from "react-icons/ai";
 
 
 export default function AddCategory() {
   const [categoryName, setCategoryName] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const {data: categoriesData, isLoading: tableLoading,refetch} = useGetData("http://localhost:5000/api/category/getCategories");
+
+  const { data: categoriesData, isLoading: tableLoading, refetch } = useGetData("http://localhost:5000/api/category/getCategories");
 
   const { data: productsData } = useGetData("http://localhost:5000/api/products/getProduct");
 
@@ -28,6 +32,7 @@ export default function AddCategory() {
     };
   });
 
+  //adding  categories
   const handleAddCategory = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -52,11 +57,30 @@ export default function AddCategory() {
       setLoading(false);
     }
   };
+  //delete the category
+  const handleDeleteCategory = async (id) => {
+    if (window.confirm("Are you sure you want to delete this category?")) {
+      console.log(id);
+      try {
+        const response = await axios.delete(`http://localhost:5000/api/category/delete/${id}`);
+        console.log(response);
+        if (response.status === 200) {
+          toast.success("Category deleted successfully!");
+          refetch();
+        } else {
+          toast.error("Failed to delete category. Please try again.");
+        }
+      } catch (error) {
+        console.error("Error deleting category:", error);
+        toast.error("An error occurred while deleting the category.");
+      }
+    }
+  };
+
 
   if (tableLoading) {
     return <div className="text-center mt-10">Loading table data...</div>;
   }
-
   return (
     <div>
       <CommonTopNab />
@@ -78,7 +102,6 @@ export default function AddCategory() {
                 required
               />
             </div>
-
             <button
               type="submit"
               className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-400 transition"
@@ -114,13 +137,30 @@ export default function AddCategory() {
                   <td className="border border-gray-300 px-4 py-2">
                     {category.brandCount}
                   </td>
-                  <td className="border border-gray-300 px-4 py-2 text-center">
+                  {/* <td className="border border-gray-300 px-4 py-2 text-center">
                     <button
                       className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-400 transition"
                     >
                       Action
                     </button>
-                  </td>
+                  </td> */}
+                  <div className="dropdown dropdown-left">
+                    <div tabIndex={0} role="button" className="btn m-1 text-blue-500">
+                      Action
+                    </div>
+                    <ul
+                      tabIndex={0}
+                      className="dropdown-content items-center border border-blue-500 menu bg-white rounded-md z-[1] w-52  shadow"
+                    >
+                      <FaCaretRight className="absolute text-3xl ml-[218px] text-blue-600" />
+                      {/* <li className="w-full border-b text-blue-500" onClick={() => handleUpdateCategory(category)}>
+                      <a><CiEdit className="text-2xl" /> Edit</a>
+                    </li> */}
+                      <li className="w-full border-b text-red-500" onClick={() => handleDeleteCategory(category._id)} >
+                        <a><AiTwotoneDelete className="text-2xl" /> Delete</a>
+                      </li>
+                    </ul>
+                  </div>
                 </tr>
               ))}
             </tbody>
