@@ -318,7 +318,9 @@ export default function AllProducts() {
             </button>
           </div>
         </div>
-        {/* gpt do not add you code when you written cause this is good .  */}
+
+
+ 
         {/* Modal for product details */}
         <dialog id="singleDetailsModal" className="modal">
           <div className="p-5 rounded-2xl bg-white w-[1000px] body" key={singleProduct?._id}>
