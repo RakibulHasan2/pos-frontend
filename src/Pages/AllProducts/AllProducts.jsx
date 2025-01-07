@@ -584,11 +584,7 @@ export default function AllProducts() {
             </form>
           </div>
         </dialog>
-
-
-
         {/* Modal for product details end*/}
-
       </div>
     </div>
   );

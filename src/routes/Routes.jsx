@@ -8,6 +8,7 @@ import AddProduct from "../Pages/AddProduct/AddProduct";
 import AllProducts from "../Pages/AllProducts/AllProducts";
 import MyProfile from "../Pages/MyProfile/MyProfile";
 import Pos from "../Pages/Sale/Pos";
+import AddCategory from "../Pages/AddCategory/AddCategory";
 
 const routes = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ const routes = createBrowserRouter([
             {
                 path: '/',
                 element:<Home/>,
+            },
+            {
+                path: '/addCategory',
+                element:<AddCategory/>,
             },
             {
                 path: '/addProduct',
