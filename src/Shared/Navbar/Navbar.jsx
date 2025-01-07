@@ -12,7 +12,7 @@ import logo from "../../assets/logo/logo.jpg"
 export default function Navbar() {
   const [expanded, setExpanded] = useState(true);
   const user = useUser();
-  console.log(user)
+  // console.log(user)
   const menuItems = [
     { id: "dashboard", text: "Dashboard", icon: <AiOutlineDashboard size={20} />, path: "/dashboard" },
     // { id: "dashboard", text: "Add product", icon: <AiOutlineDashboard size={20} />, path: "/addProduct" },
@@ -21,6 +21,7 @@ export default function Navbar() {
       text: "Products",
       icon: <AiOutlineProduct  size={20} />,
       submenu: [
+        { id: "AddCategory", text: "Add Category", icon: <MdFormatListBulletedAdd size={16} />, path: "/addCategory" },
         { id: "AddProduct", text: "Add Product", icon: <MdFormatListBulletedAdd size={16} />, path: "/addProduct" },
         { id: "AllProducts", text: "All Products", icon: <MdOutlinePlaylistAddCheck size={18} />, path: "/allProducts" },
       ],
