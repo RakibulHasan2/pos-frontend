@@ -1,8 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState, useRef } from "react";
 import CommonTopNab from "../../Shared/CommonTopNav/CommonTopNab";
-import useLoader from "../../Shared/Loader/Loader";
-import FinalLoader from "../../Shared/Loader/FinalLoader";
 import axios from "axios";
 import { Toaster } from "react-hot-toast";
 import toast from "react-hot-toast";
@@ -18,17 +16,25 @@ export default function Pos() {
     const [searchCode, setSearchCode] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(9);
-    const [selectedDate, setSelectedDate] = useState("");
+    // const [selectedDate, setSelectedDate] = useState("");
     // const [subtotal, setSubtotal] = useState(0);
     const [purchasedProducts, setPurchasedProducts] = useState([]);
     const [grandTotal, setGrandTotal] = useState(0);
 
-    // Fetch cart from session storage on component mount
+    const [formData, setFormData] = useState({
+        customerName: "",
+        customerEmail: "",
+        customerPhone: "",
+        customerAddress: "",
+        purchaseDate: "",
+    });
+    const [isLoading, setIsLoading] = useState(false);
+
     useEffect(() => {
         const cart = JSON.parse(sessionStorage.getItem("purchased_products")) || [];
         setPurchasedProducts(cart);
+        calculateGrandTotal(cart);
     }, []);
-    const { loading, online } = useLoader();
 
     // Refs for audio elements
     const successSoundRef = useRef(null);
@@ -120,17 +126,14 @@ export default function Pos() {
 
 
 
-    // date 
-    useEffect(() => {
-        // Get today's date in YYYY-MM-DD format
-        const today = new Date();
-        const formattedDate = today.toISOString().split("T")[0]; // Extract date part only
-        setSelectedDate(formattedDate); // Set the default date
-    }, []);
+    // // date 
+    // useEffect(() => {
+    //     // Get today's date in YYYY-MM-DD format
+    //     const today = new Date();
+    //     const formattedDate = today.toISOString().split("T")[0]; // Extract date part only
+    //     setSelectedDate(formattedDate); // Set the default date
+    // }, []);
 
-    const handleDateChange = (e) => {
-        setSelectedDate(e.target.value); // Update state when user selects a new date
-    };
     // Calculate grand total when purchasedProducts changes
     useEffect(() => {
         calculateGrandTotal();
@@ -187,10 +190,65 @@ export default function Pos() {
         setGrandTotal(total.toFixed(2));
     };
 
+    // Handle input changes
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    // Handle form submission
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const { customerName, customerEmail, customerPhone, customerAddress, purchaseDate } = formData;
+
+        if (!customerName || !customerEmail || !customerPhone || !customerAddress || !purchaseDate) {
+            toast.error("Please fill in all required fields.");
+            return;
+        }
+
+        if (purchasedProducts.length === 0) {
+            toast.error("No products in the cart.");
+            return;
+        }
+
+        const payload = {
+            ...formData,
+            purchasedProducts,
+            grandTotal,
+            totalItems: purchasedProducts.reduce((total, product) => total + product.quantity, 0),
+        };
+
+        try {
+            setIsLoading(true);
+            const response = await axios.post(
+                "http://localhost:5000/api/customerProduct/createCustomerProduct",
+                payload
+            );
+
+            if (response.status === 201) {
+                toast.success("Order submitted successfully!");
+                setFormData({
+                    customerName: "",
+                    customerEmail: "",
+                    customerPhone: "",
+                    customerAddress: "",
+                    purchaseDate: "",
+                });
+                setPurchasedProducts([]);
+                sessionStorage.removeItem("purchased_products");
+                setGrandTotal(0);
+            }
+        } catch (error) {
+            console.error("Error submitting data:", error);
+            toast.error("Failed to submit order. Please try again.");
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     console.log(purchasedProducts)
-    if (loading || !online) {
-        return <FinalLoader />;
-    }
+
 
     return (
         <div>
@@ -208,81 +266,70 @@ export default function Pos() {
             <section className="flex mt-2 mb-10">
                 <div className="w-[55%] p-3 border">
                     <div className="">
-                        <form>
-                            <div className="flex flex-wrap gap-3 border-b pb-3">
-                                {/* name */}
-                                <div className="">
-                                    <label
-
-                                        className="block text-gray-700 text-sm font-medium mb-2"
-                                    >
-                                        Customer name <span className="text-red-600">*</span>
+                        <div className="form-container">
+                            <form onSubmit={handleSubmit}>
+                                <div>
+                                    <label>
+                                        Customer Name<span>*</span>
                                     </label>
                                     <input
+                                        name="customerName"
+                                        value={formData.customerName}
+                                        onChange={handleInputChange}
                                         required
-                                        type="text"
-                                        className="w-56 px-4 py-2 text-sm border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
                                     />
                                 </div>
-                                {/* email */}
-                                <div className="">
-                                    <label
-                                        className="block text-gray-700 text-sm font-medium mb-2"
-                                    >
-                                        Customer Email <span className="text-red-600">*</span>
+                                <div>
+                                    <label>
+                                        Customer Email<span>*</span>
                                     </label>
                                     <input
-                                        required
+                                        name="customerEmail"
                                         type="email"
-                                        className="w-56 px-4 py-2 text-sm border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
-                                    />
-                                </div>
-                                {/* phone */}
-                                <div className="">
-                                    <label
-                                        className="block text-gray-700 text-sm font-medium mb-2"
-                                    >
-                                        Customer phone<span className="text-red-600">*</span>
-                                    </label>
-                                    <input
+                                        value={formData.customerEmail}
+                                        onChange={handleInputChange}
                                         required
-                                        type="text"
-                                        className="w-56 px-4 py-2 text-sm border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
                                     />
                                 </div>
-                                {/* address */}
-                                <div className="">
-                                    <label
-                                        className="block text-gray-700 text-sm font-medium mb-2"
-                                    >
-                                        Customer address<span className="text-red-600">*</span>
+                                <div>
+                                    <label>
+                                        Customer Phone<span>*</span>
                                     </label>
                                     <input
+                                        name="customerPhone"
+                                        value={formData.customerPhone}
+                                        onChange={handleInputChange}
                                         required
-                                        type="text"
-                                        className=" px-4 w-[500px] py-2 text-sm border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
                                     />
                                 </div>
-
-                                {/* date */}
-                                <div className="">
-                                    <label
-                                        htmlFor="date"
-                                        className="block text-gray-700 text-sm font-medium mb-2"
-                                    >
-                                        Today&apos;s Date
+                                <div>
+                                    <label>
+                                        Customer Address<span>*</span>
                                     </label>
                                     <input
+                                        name="customerAddress"
+                                        value={formData.customerAddress}
+                                        onChange={handleInputChange}
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <label>
+                                        Purchase Date<span>*</span>
+                                    </label>
+                                    <input
+                                        name="purchaseDate"
                                         type="date"
-                                        id="date"
-                                        value={selectedDate} // Bind the value to state
-                                        onChange={handleDateChange} // Handle date change
-                                        className="w-40 px-4 py-2 text-sm border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
+                                        value={formData.purchaseDate}
+                                        onChange={handleInputChange}
+                                        required
                                     />
                                 </div>
-                            </div>
-
-                        </form>
+                                <button type="submit" disabled={isLoading}>
+                                    {isLoading ? "Submitting..." : "Submit Order"}
+                                </button>
+                            </form>
+                        </div>
 
                         <div className="h-[500px] overflow-y-auto mt-5">
                             {purchasedProducts.length === 0 ? (
@@ -364,16 +411,18 @@ export default function Pos() {
                         </div>
                         {/* Grand Total */}
                         <div className="mt-5 border-t pt-4 bg-blue-100 p-5 rounded-lg flex flex-col items-end">
-                        <p><strong>Total item:</strong> {purchasedProducts.reduce((total, product) => total + product.quantity, 0)}</p>
+                            <p><strong>Total item:</strong> {purchasedProducts.reduce((total, product) => total + product.quantity, 0)}</p>
                             <p className="text-lg font-semibold">
                                 Grand Total: ${grandTotal}
                             </p>
                             {/* Total Quantity */}
-                            
+
                         </div>
 
                     </div>
                 </div>
+
+
 
                 <div className="w-[45%] min-h-screen border border-blue-500 rounded-2xl">
                     <div className="flex px-3 py-3 items-center gap-5 border-b border-blue-500">
