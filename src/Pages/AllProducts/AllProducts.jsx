@@ -318,8 +318,6 @@ export default function AllProducts() {
             </button>
           </div>
         </div>
-
-
         {/* gpt do not add you code when you written cause this is good .  */}
         {/* Modal for product details */}
         <dialog id="singleDetailsModal" className="modal">
@@ -584,11 +582,7 @@ export default function AllProducts() {
             </form>
           </div>
         </dialog>
-
-
-
         {/* Modal for product details end*/}
-
       </div>
     </div>
   );
