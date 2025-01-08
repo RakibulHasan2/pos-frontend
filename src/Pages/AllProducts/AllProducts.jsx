@@ -28,7 +28,7 @@ export default function AllProducts() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/products/getProduct"
+          "https://pos-backend-delta.vercel.app/api/products/getProduct"
         );
         setProducts(response.data.products);
         setFilteredProducts(response.data.products);
@@ -47,7 +47,7 @@ export default function AllProducts() {
   // useEffect(() => {
   //   const fetchData = async () => {
   //     try {
-  //       const response = await axios.get("http://localhost:5000/api/products/getProduct");
+  //       const response = await axios.get("https://pos-backend-delta.vercel.app/api/products/getProduct");
   //       setProducts(response.data.products);
   //       setFilteredProducts(response.data.products);
 
@@ -72,7 +72,7 @@ export default function AllProducts() {
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/category/getCategories"
+          "https://pos-backend-delta.vercel.app/api/category/getCategories"
         );
         setCategories(response.data.categories);
       } catch (error) {
@@ -97,7 +97,7 @@ export default function AllProducts() {
   const handleViewProduct = async (id) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/products/single/${id}`
+        `https://pos-backend-delta.vercel.app/api/products/single/${id}`
       );
       setSingleProduct(response.data);
       document.getElementById("singleDetailsModal").showModal();
@@ -109,7 +109,7 @@ export default function AllProducts() {
   const handleUpdateProductFetch = async (id) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/products/single/${id}`
+        `https://pos-backend-delta.vercel.app/api/products/single/${id}`
       );
       setUpdateProduct(response.data);
       document.getElementById("updateModal").showModal();
@@ -147,7 +147,7 @@ export default function AllProducts() {
   
     try {
       const response = await axios.delete(
-        `http://localhost:5000/api/products/delete/${id}`
+        `https://pos-backend-delta.vercel.app/api/products/delete/${id}`
       );
   
       if (response.status === 200) {
@@ -418,7 +418,7 @@ export default function AllProducts() {
                 // Send the PUT request
                 try {
                   const response = await fetch(
-                    `http://localhost:5000/api/products/update/${updateProduct._id}`,
+                    `https://pos-backend-delta.vercel.app/api/products/update/${updateProduct._id}`,
                     {
                       method: "PUT",
                       headers: {
