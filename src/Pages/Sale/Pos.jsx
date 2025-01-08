@@ -4,8 +4,9 @@ import CommonTopNab from "../../Shared/CommonTopNav/CommonTopNab";
 import axios from "axios";
 import { Toaster } from "react-hot-toast";
 import toast from "react-hot-toast";
-import successSound from ".././../../public/sounds/success.wav"
+import successSound from ".././../../public/sounds/success.mp3"
 import errorSound from ".././../../public/sounds/error.mp3"
+import notifications from ".././../../public/sounds/notification.mp3"
 export default function Pos() {
     const [selectedCategory, setSelectedCategory] = useState("");
     const [products, setProducts] = useState([]);
@@ -39,6 +40,7 @@ export default function Pos() {
     // Refs for audio elements
     const successSoundRef = useRef(null);
     const errorSoundRef = useRef(null);
+    const notificationSoundRef = useRef(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -208,7 +210,9 @@ export default function Pos() {
         }
 
         if (purchasedProducts.length === 0) {
-            toast.error("No products in the cart.");
+            
+            toast.error("No product added to the purchase list");
+            errorSoundRef.current.play();
             return;
         }
 
@@ -228,6 +232,8 @@ export default function Pos() {
 
             if (response.status === 201) {
                 toast.success("Order submitted successfully!");
+                notificationSoundRef.current.play();
+                console.log(response.data)
                 setFormData({
                     customerName: "",
                     customerEmail: "",
@@ -256,6 +262,7 @@ export default function Pos() {
             {/* Audio Elements */}
             <audio ref={successSoundRef} src={successSound} preload="auto" />
             <audio ref={errorSoundRef} src={errorSound} preload="auto" />
+            <audio ref={notificationSoundRef} src={notifications} preload="auto" />
 
             {/* Toaster for Notifications */}
             <Toaster
@@ -264,24 +271,25 @@ export default function Pos() {
             />
 
             <section className="flex mt-2 mb-10">
-                <div className="w-[55%] p-3 border">
+                <div className="w-[55%] p-3">
                     <div className="">
                         <div className="form-container">
-                            <form onSubmit={handleSubmit}>
-                                <div>
-                                    <label>
-                                        Customer Name<span>*</span>
+                            <form onSubmit={handleSubmit} className="border-b border-blue-300">
+                                <div className="flex flex-wrap gap-2">          
+                                <div className="flex flex-col">
+                                    <label className="text-sm">
+                                        Customer Name<span className="text-red-600">*</span>
                                     </label>
                                     <input
                                         name="customerName"
                                         value={formData.customerName}
                                         onChange={handleInputChange}
                                         required
-                                    />
+                                        className="border h-10 w-[220px] border-blue-100 pl-3 rounded-lg outline-none"                                    />
                                 </div>
-                                <div>
-                                    <label>
-                                        Customer Email<span>*</span>
+                                <div className="flex flex-col">
+                                    <label className="text-sm">
+                                        Customer Email<span className="text-red-600">*</span>
                                     </label>
                                     <input
                                         name="customerEmail"
@@ -289,33 +297,36 @@ export default function Pos() {
                                         value={formData.customerEmail}
                                         onChange={handleInputChange}
                                         required
+                                         className="border h-10 w-[220px] border-blue-100 pl-3 rounded-lg outline-none"
                                     />
                                 </div>
-                                <div>
-                                    <label>
-                                        Customer Phone<span>*</span>
+                                <div className="flex flex-col">
+                                    <label className="text-sm">
+                                        Customer Phone<span className="text-red-600">*</span>
                                     </label>
                                     <input
                                         name="customerPhone"
                                         value={formData.customerPhone}
                                         onChange={handleInputChange}
                                         required
+                                         className="border h-10 w-[220px] border-blue-100 pl-3 rounded-lg outline-none"
                                     />
                                 </div>
-                                <div>
-                                    <label>
-                                        Customer Address<span>*</span>
+                                <div className="flex flex-col">
+                                    <label className="text-sm">
+                                        Customer Address<span className="text-red-600">*</span>
                                     </label>
                                     <input
                                         name="customerAddress"
                                         value={formData.customerAddress}
                                         onChange={handleInputChange}
                                         required
+                                         className="border h-10 w-[500px] border-blue-100 pl-3 rounded-lg outline-none"
                                     />
                                 </div>
-                                <div>
-                                    <label>
-                                        Purchase Date<span>*</span>
+                                <div className="flex flex-col">
+                                    <label className="text-sm">
+                                        Purchase Date<span className="text-red-600">*</span>
                                     </label>
                                     <input
                                         name="purchaseDate"
@@ -323,17 +334,19 @@ export default function Pos() {
                                         value={formData.purchaseDate}
                                         onChange={handleInputChange}
                                         required
+                                         className="border h-10 w-[150px] border-blue-100 pl-3 rounded-lg outline-none"
                                     />
                                 </div>
-                                <button type="submit" disabled={isLoading}>
+                                </div>
+                                <button className="border px-2 py-2 mt-2 rounded-lg mb-2 bg-blue-500 text-white hover:bg-blue-600 transition-all duration-300" type="submit" disabled={isLoading}>
                                     {isLoading ? "Submitting..." : "Submit Order"}
                                 </button>
                             </form>
                         </div>
 
-                        <div className="h-[500px] overflow-y-auto mt-5">
+                        <div className="h-[300px] overflow-y-auto mt-5 text-sm">
                             {purchasedProducts.length === 0 ? (
-                                <p>No products found in the cart.</p>
+                               <div className="flex justify-center items-center mt-20"> <p>No product added.</p></div>
                             ) : (
                                 <>
                                     <ul>

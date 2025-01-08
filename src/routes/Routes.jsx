@@ -9,6 +9,8 @@ import AllProducts from "../Pages/AllProducts/AllProducts";
 import MyProfile from "../Pages/MyProfile/MyProfile";
 import Pos from "../Pages/Sale/Pos";
 import AddCategory from "../Pages/AddCategory/AddCategory";
+import CustomerList from "../Pages/CustomerList/CustomerList";
+import SingleCustomerProductDetails from "../Pages/CustomerList/SingleCustomerProductDetails";
 
 const routes = createBrowserRouter([
     {
@@ -38,6 +40,17 @@ const routes = createBrowserRouter([
             {
                 path: '/myProfile',
                 element:<MyProfile/>,
+            },
+            {
+                path: '/customerList',
+                element:<CustomerList/>,
+            },
+            {
+                path: '/singleCustomerList/:id',
+                element:<SingleCustomerProductDetails/>,
+                loader:async ({params}) =>{
+                    return fetch(`http://localhost:5000/api/customerProduct/single/${params?.id}`)
+                }
             },
            
             {
