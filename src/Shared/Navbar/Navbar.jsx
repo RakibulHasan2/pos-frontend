@@ -34,7 +34,7 @@ export default function Navbar() {
       icon: <CiShoppingCart size={20} />,
       submenu: [
         { id: "pos", text: "POS", icon: <BsFileEarmarkPost size={16} />, path: "/pos" },
-        { id: "CustomerList", text: "Customer List", icon: <FaUsersViewfinder size={18} />, path: "/customerList" },
+        { id: "CustomerList", text: "Sale List", icon: <FaUsersViewfinder size={18} />, path: "/customerList" },
       ],
     },
     {
