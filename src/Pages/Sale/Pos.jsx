@@ -4,8 +4,9 @@ import CommonTopNab from "../../Shared/CommonTopNav/CommonTopNab";
 import axios from "axios";
 import { Toaster } from "react-hot-toast";
 import toast from "react-hot-toast";
-import successSound from ".././../../public/sounds/success.wav"
+import successSound from ".././../../public/sounds/success.mp3"
 import errorSound from ".././../../public/sounds/error.mp3"
+import notifications from ".././../../public/sounds/notification.mp3"
 export default function Pos() {
     const [selectedCategory, setSelectedCategory] = useState("");
     const [products, setProducts] = useState([]);
@@ -39,6 +40,7 @@ export default function Pos() {
     // Refs for audio elements
     const successSoundRef = useRef(null);
     const errorSoundRef = useRef(null);
+    const notificationSoundRef = useRef(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -208,7 +210,9 @@ export default function Pos() {
         }
 
         if (purchasedProducts.length === 0) {
-            toast.error("No products in the cart.");
+            
+            toast.error("No product added to the purchase list");
+            errorSoundRef.current.play();
             return;
         }
 
@@ -228,6 +232,7 @@ export default function Pos() {
 
             if (response.status === 201) {
                 toast.success("Order submitted successfully!");
+                notificationSoundRef.current.play();
                 console.log(response.data)
                 setFormData({
                     customerName: "",
@@ -257,6 +262,7 @@ export default function Pos() {
             {/* Audio Elements */}
             <audio ref={successSoundRef} src={successSound} preload="auto" />
             <audio ref={errorSoundRef} src={errorSound} preload="auto" />
+            <audio ref={notificationSoundRef} src={notifications} preload="auto" />
 
             {/* Toaster for Notifications */}
             <Toaster
@@ -340,7 +346,7 @@ export default function Pos() {
 
                         <div className="h-[300px] overflow-y-auto mt-5 text-sm">
                             {purchasedProducts.length === 0 ? (
-                                <p>No products found in the cart.</p>
+                               <div className="flex justify-center items-center mt-20"> <p>No product added.</p></div>
                             ) : (
                                 <>
                                     <ul>

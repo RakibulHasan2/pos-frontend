@@ -7,9 +7,10 @@ import { AiOutlineDashboard, AiOutlineProduct, AiOutlineSetting } from "react-ic
 import { FiUser } from "react-icons/fi";
 import { BsChevronDown, BsChevronUp, BsFileEarmarkPost } from "react-icons/bs";
 import useUser from "../getUser/GetUser";
-import { MdFormatListBulletedAdd, MdOutlinePlaylistAddCheck } from "react-icons/md";
+import { MdFormatListBulletedAdd, MdOutlineCategory, MdOutlinePlaylistAddCheck } from "react-icons/md";
 import logo from "../../assets/logo/logo.jpg"
 import { CiShoppingCart } from "react-icons/ci";
+import { FaUsersViewfinder } from "react-icons/fa6";
 export default function Navbar() {
   const [expanded, setExpanded] = useState(true);
   const user = useUser();
@@ -22,7 +23,7 @@ export default function Navbar() {
       text: "Products",
       icon: <AiOutlineProduct  size={20} />,
       submenu: [
-        { id: "AddCategory", text: "Category", icon: <MdFormatListBulletedAdd size={16} />, path: "/addCategory" },
+        { id: "AddCategory", text: "Category", icon: <MdOutlineCategory size={16} />, path: "/addCategory" },
         { id: "AddProduct", text: "Add Product", icon: <MdFormatListBulletedAdd size={16} />, path: "/addProduct" },
         { id: "AllProducts", text: "All Products", icon: <MdOutlinePlaylistAddCheck size={18} />, path: "/allProducts" },
       ],
@@ -33,7 +34,7 @@ export default function Navbar() {
       icon: <CiShoppingCart size={20} />,
       submenu: [
         { id: "pos", text: "POS", icon: <BsFileEarmarkPost size={16} />, path: "/pos" },
-        { id: "AllProducts", text: "All Products", icon: <MdOutlinePlaylistAddCheck size={18} />, path: "" },
+        { id: "CustomerList", text: "Customer List", icon: <FaUsersViewfinder size={18} />, path: "/customerList" },
       ],
     },
     {
