@@ -3,10 +3,11 @@ import {  useState } from 'react';
 import { CiPower, CiSettings, CiUser } from 'react-icons/ci';
 import useUser from '../getUser/GetUser';
 import { MdOutlineArrowDropDown } from 'react-icons/md';
-import { IoMoonOutline, IoSunnyOutline } from 'react-icons/io5';
+import { IoHomeOutline, IoMoonOutline, IoSunnyOutline } from 'react-icons/io5';
 import { AiOutlineFullscreen, AiOutlineFullscreenExit } from 'react-icons/ai';
-import { NavLink, useNavigate } from 'react-router';
+import { NavLink, useLocation, useNavigate } from 'react-router';
 import { toast, ToastContainer } from 'react-toastify';
+import { FaUsersViewfinder } from 'react-icons/fa6';
 
 export default function CommonTopNab() {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
@@ -52,12 +53,31 @@ const toggleDarkMode = () => {
   }
 };
 
+const location = useLocation();
+    const isLocation = location.pathname === "/dashboard"
   return (
     <div className="w-full h-16 border-b flex items-center justify-between gap-5 pr-5">
-    <p className="ml-5 uppercase text-3xl font-semibold text-blue-600">
-      Welcome {user?.name}
+    <p className={`ml-5 uppercase text-3xl font-semibold  text-blue-600`}>
+     { isLocation &&  `Welcome ${user?.name}`}
     </p>
     <div className="flex gap-8">
+    <NavLink to="/dashboard">
+    <button
+        className="flex items-center border px-2 py-2 rounded-xl transition-all duration-300 hover:bg-blue-100"
+        
+      >
+    <IoHomeOutline className="text-2xl" />
+      </button>
+    </NavLink> 
+  <NavLink to="/customerList">
+    <button
+        className="flex items-center border px-2 py-2 rounded-xl transition-all duration-300 hover:bg-blue-100"
+        
+      >
+    <FaUsersViewfinder className="text-2xl" />
+      </button>
+    </NavLink>  
+   
       <button
         className="flex items-center px-2 py-2 rounded-xl transition-all duration-300 hover:bg-blue-100"
         onClick={handleFullScreen}

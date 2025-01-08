@@ -20,7 +20,7 @@ export default function MyProfile() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const { loading, online } = useLoader();
-   
+    const [refetchToggle, setRefetchToggle] = useState(false); // For triggering refetch
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -39,14 +39,17 @@ export default function MyProfile() {
     const id = userGet?.id
 
 
+    // Fetch user data
     useEffect(() => {
         const fetchData = async () => {
             try {
                 setIsLoading(true);
                 const response = await axios.get(`http://localhost:5000/api/users/${id}`);
                 setUser(response.data);
+                setFormData(response.data); // Populate form with fetched data
             } catch (err) {
                 setError(err);
+                console.error("Error fetching user:", err);
             } finally {
                 setIsLoading(false);
             }
@@ -55,7 +58,7 @@ export default function MyProfile() {
         if (id) {
             fetchData();
         }
-    }, [id]);
+    }, [id, refetchToggle]); // Refetch when refetchToggle changes
 
     if (isLoading) {
         return <div className='flex justify-center items-center h-screen text-white'>Loading...</div>;
@@ -74,23 +77,25 @@ export default function MyProfile() {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleFormSubmit = async (e) => {
-        e.preventDefault();
-        setLoading1(true);
-        try {
-            const response = await axios.put(
-                `http://localhost:5000/api/users/update/${id}`,
-                formData
-            );
-            //   alert("User information updated successfully!");
-            toast.success(response.data.message)
-            setLoading1(false);
-            // console.log(response.data);
-        } catch (error) {
-            console.error("Error updating user:", error);
-            toast.error("Failed to update user.");
-        }
-    };
+ // Handle form submission for updating user
+ const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    setLoading1(true);
+    try {
+        const response = await axios.put(
+            `http://localhost:5000/api/users/update/${id}`,
+            formData
+        );
+        toast.success(response.data.message);
+        setLoading1(false);
+        setRefetchToggle(!refetchToggle); // Toggle refetchToggle to refetch user data
+    } catch (error) {
+        console.error("Error updating user:", error);
+        toast.error("Failed to update user.");
+    } finally {
+        setLoading1(false);
+    }
+};
 
 
 
