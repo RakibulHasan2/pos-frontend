@@ -1,6 +1,7 @@
 import { useState } from "react";
 import CommonTopNab from "../../Shared/CommonTopNav/CommonTopNab";
 import useGetData from './../../Hooks/useGetData';
+import FinalLoader from './../../Shared/Loader/FinalLoader';
 
 export default function People() {
     const { data: categoriesData, isLoading: tableLoading } = useGetData(
@@ -33,10 +34,8 @@ export default function People() {
         customer.customerPhone.includes(filter)
     );
 
-
-
     if (tableLoading) {
-        return <p>Loading data...</p>;
+        return <FinalLoader />;
     }
     return (
         <div>
