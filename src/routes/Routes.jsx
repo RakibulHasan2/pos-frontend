@@ -57,7 +57,6 @@ const routes = createBrowserRouter([
                     return fetch(`http://localhost:5000/api/customerProduct/single/${params?.id}`)
                 }
             },
-           
             {
                 path: '*',
                 element: <NotFound/>,

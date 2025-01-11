@@ -4,6 +4,7 @@ import { NavLink, useLocation } from "react-router";
 import { LuChevronFirst, LuChevronLast } from "react-icons/lu";
 import { AiOutlineDashboard, AiOutlineProduct, AiOutlineSetting } from "react-icons/ai";
 import { FiUser } from "react-icons/fi";
+import { MdOutlinePeopleAlt } from "react-icons/md";
 import { BsChevronDown, BsChevronUp, BsFileEarmarkPost } from "react-icons/bs";
 import useUser from "../getUser/GetUser";
 import { MdFormatListBulletedAdd, MdOutlineCategory, MdOutlinePlaylistAddCheck } from "react-icons/md";
@@ -39,9 +40,9 @@ export default function Navbar() {
     {
       id: "People",
       text: "People",
-      icon: <CiShoppingCart size={20} />,
+      icon: <MdOutlinePeopleAlt size={20} />,
       submenu: [
-        { id: "PeopleList", text: "People List", icon: <FaUsersViewfinder size={18} />, path: "/peopleList" },
+        { id: "PeopleList", text: "People List", icon: <MdOutlinePeopleAlt size={18} />, path: "/peopleList" },
       ],
     },
     {
