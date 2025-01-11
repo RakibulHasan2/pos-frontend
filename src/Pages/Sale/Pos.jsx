@@ -48,7 +48,7 @@ export default function Pos() {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    "http://localhost:5000/api/products/getProduct"
+                    "https://pos-backend-delta.vercel.app/api/products/getProduct"
                 );
                 setProducts(response.data.products);
                 setFilteredProducts(response.data.products);
@@ -68,7 +68,7 @@ export default function Pos() {
         const fetchCategories = async () => {
             try {
                 const response = await axios.get(
-                    "http://localhost:5000/api/category/getCategories"
+                    "https://pos-backend-delta.vercel.app/api/category/getCategories"
                 );
                 setCategories(response.data.categories);
             } catch (error) {
@@ -218,7 +218,7 @@ export default function Pos() {
         try {
             setIsLoading(true);
             const response = await axios.post(
-                "http://localhost:5000/api/customerProduct/createCustomerProduct",
+                "https://pos-backend-delta.vercel.app/api/customerProduct/createCustomerProduct",
                 payload
             );
 

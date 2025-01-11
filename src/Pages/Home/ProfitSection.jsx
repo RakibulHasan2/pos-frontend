@@ -8,7 +8,7 @@ import { IoTrophyOutline } from "react-icons/io5";
 
 export default function ProfitSection() {
   const { data: sellData, isLoading: tableLoading} = useGetData(
-    "http://localhost:5000/api/customerProduct/getAllCustomerProducts"
+    "https://pos-backend-delta.vercel.app/api/customerProduct/getAllCustomerProducts"
   );
 
   const [profitStats, setProfitStats] = useState({

@@ -10,7 +10,7 @@ import toast from 'react-hot-toast';
 
 export default function CustomerList() {
     const { data: categoriesData, isLoading: tableLoading } = useGetData(
-        "http://localhost:5000/api/customerProduct/getAllCustomerProducts"
+        "https://pos-backend-delta.vercel.app/api/customerProduct/getAllCustomerProducts"
     );
 
     const [filter, setFilter] = useState("");
@@ -40,7 +40,7 @@ export default function CustomerList() {
         if (!confirmDelete) return;
     
         try {
-          const response = await fetch(`http://localhost:5000/api/customerProduct/delete/${id}`, {
+          const response = await fetch(`https://pos-backend-delta.vercel.app/api/customerProduct/delete/${id}`, {
             method: "DELETE",
           });
     

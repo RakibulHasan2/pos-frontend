@@ -17,7 +17,7 @@ defaults.plugins.title.color = "black";
 
 const ProfitChart = () => {
   const { data: sellData } = useGetData(
-    "http://localhost:5000/api/customerProduct/getAllCustomerProducts"
+    "https://pos-backend-delta.vercel.app/api/customerProduct/getAllCustomerProducts"
   );
 
   const [chartData, setChartData] = useState({
