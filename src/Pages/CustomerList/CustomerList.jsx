@@ -135,7 +135,7 @@ export default function CustomerList() {
                                             <li className="w-full border-b text-red-500">
                                                 <a
                                                     onClick={() => handleDelete(customer._id)}
-                                                    className="cursor-pointer flex items-center gap-2"
+                                                    className="cursor-pointer flex items-center  justify-center gap-2"
                                                 >
                                                     <AiTwotoneDelete className="text-2xl" /> Delete
                                                 </a>

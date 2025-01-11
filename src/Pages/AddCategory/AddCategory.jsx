@@ -5,13 +5,15 @@ import useGetData from "../../Hooks/useGetData";
 import axios from "axios";
 import { FaCaretRight, FaEdit } from "react-icons/fa";
 import { AiTwotoneDelete } from "react-icons/ai";
+import useLoader from "../../Shared/Loader/Loader";
+import FinalLoader from "../../Shared/Loader/FinalLoader";
 
 export default function AddCategory() {
   const [categoryName, setCategoryName] = useState("");
   const [loading, setLoading] = useState(false);
   const [editingCategory, setEditingCategory] = useState(null); // For storing the category being edited
   const [editLoading, setEditLoading] = useState(false); // For the update loading state
-
+  const { loading2, online } = useLoader();
   const { data: categoriesData, isLoading: tableLoading, refetch } = useGetData(
     "http://localhost:5000/api/category/getCategories"
   );
@@ -126,6 +128,9 @@ export default function AddCategory() {
     return <div className="text-center mt-10">Loading table data...</div>;
   }
 
+  if (loading2 || !online) {
+    return <FinalLoader />;
+}
   return (
     <div>
       <CommonTopNab />
