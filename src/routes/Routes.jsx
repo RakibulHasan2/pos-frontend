@@ -11,6 +11,7 @@ import Pos from "../Pages/Sale/Pos";
 import AddCategory from "../Pages/AddCategory/AddCategory";
 import CustomerList from "../Pages/CustomerList/CustomerList";
 import SingleCustomerProductDetails from "../Pages/CustomerList/SingleCustomerProductDetails";
+import People from "../Pages/CustomerList/People";
 
 const routes = createBrowserRouter([
     {
@@ -44,6 +45,10 @@ const routes = createBrowserRouter([
             {
                 path: '/customerList',
                 element:<CustomerList/>,
+            },
+            {
+                path: '/peopleList',
+                element:<People/>,
             },
             {
                 path: '/singleCustomerList/:id',

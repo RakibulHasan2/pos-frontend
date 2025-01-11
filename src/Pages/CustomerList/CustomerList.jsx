@@ -148,21 +148,6 @@ export default function CustomerList() {
                     </table>
                 )}
             </div>
-
-            {/* modal area */}
-            <dialog id="my_modal_3" className="modal">
-                <div className="w-[1000px] bg-white p-5 rounded-xl">
-                    <form method="dialog">
-                        {/* if there is a button in form, it will close the modal */}
-                        <div className='flex justify-end'>
-                            <button className="btn btn-sm btn-circle btn-ghost">✕</button>
-                        </div>
-                    </form>
-                    <div>
-                        sing product details area
-                    </div>
-                </div>
-            </dialog>
         </div>
     );
 }

@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router";
-import { CgMoreVertical } from "react-icons/cg";
 import { LuChevronFirst, LuChevronLast } from "react-icons/lu";
 import { AiOutlineDashboard, AiOutlineProduct, AiOutlineSetting } from "react-icons/ai";
 import { FiUser } from "react-icons/fi";
@@ -35,6 +34,14 @@ export default function Navbar() {
       submenu: [
         { id: "pos", text: "POS", icon: <BsFileEarmarkPost size={16} />, path: "/pos" },
         { id: "CustomerList", text: "Sale List", icon: <FaUsersViewfinder size={18} />, path: "/customerList" },
+      ],
+    },
+    {
+      id: "People",
+      text: "People",
+      icon: <CiShoppingCart size={20} />,
+      submenu: [
+        { id: "PeopleList", text: "People List", icon: <FaUsersViewfinder size={18} />, path: "/peopleList" },
       ],
     },
     {
@@ -102,7 +109,6 @@ export default function Navbar() {
                 <span className="text-xs text-gray-600">{user?.email}</span>
               </div>
               </NavLink> 
-              <CgMoreVertical size={20} />
             </div>
           </div>
         </nav>
