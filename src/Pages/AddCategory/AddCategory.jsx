@@ -15,10 +15,10 @@ export default function AddCategory() {
   const [editLoading, setEditLoading] = useState(false); // For the update loading state
   const { loading2, online } = useLoader();
   const { data: categoriesData, isLoading: tableLoading, refetch } = useGetData(
-    "http://localhost:5000/api/category/getCategories"
+    "https://pos-backend-delta.vercel.app/api/category/getCategories"
   );
 
-  const { data: productsData } = useGetData("http://localhost:5000/api/products/getProduct");
+  const { data: productsData } = useGetData("https://pos-backend-delta.vercel.app/api/products/getProduct");
 
   const enrichedCategories = categoriesData?.categories?.map((category) => {
     const productsInCategory = productsData?.products?.filter(
@@ -41,7 +41,7 @@ export default function AddCategory() {
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/category/crate-category",
+        "https://pos-backend-delta.vercel.app/api/category/crate-category",
         {
           category_name: categoryName,
         }
@@ -64,7 +64,7 @@ export default function AddCategory() {
   // Fetch single category details
   const handleEditCategory = async (id) => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/category/single/${id}`);
+      const response = await axios.get(`https://pos-backend-delta.vercel.app/api/category/single/${id}`);
       if (response.status === 200) {
         setEditingCategory(response.data); // Set the category being edited
         setCategoryName(response.data.category_name); // Set the input value
@@ -84,7 +84,7 @@ export default function AddCategory() {
     setEditLoading(true);
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/category/update/${editingCategory._id}`,
+        `https://pos-backend-delta.vercel.app/api/category/update/${editingCategory._id}`,
         { category_name: categoryName }
       );
 
@@ -109,7 +109,7 @@ export default function AddCategory() {
     if (window.confirm("Are you sure you want to delete this category?")) {
       try {
         const response = await axios.delete(
-          `http://localhost:5000/api/category/delete/${id}`
+          `https://pos-backend-delta.vercel.app/api/category/delete/${id}`
         );
         if (response.status === 200) {
           toast.success("Category deleted successfully!");

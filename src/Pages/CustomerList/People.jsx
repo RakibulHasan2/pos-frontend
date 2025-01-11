@@ -4,7 +4,7 @@ import useGetData from './../../Hooks/useGetData';
 
 export default function People() {
     const { data: categoriesData, isLoading: tableLoading } = useGetData(
-        "http://localhost:5000/api/customerProduct/getAllCustomerProducts"
+        "https://pos-backend-delta.vercel.app/api/customerProduct/getAllCustomerProducts"
     );
 
     const [filter, setFilter] = useState("");

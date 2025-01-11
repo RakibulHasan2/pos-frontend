@@ -142,7 +142,7 @@ export default function SingleCustomerProductDetails() {
   const handlePaymentConfirmation = async () => {
     try {
       // Fetch all products
-      const productsResponse = await axios.get("http://localhost:5000/api/products/getProduct");
+      const productsResponse = await axios.get("https://pos-backend-delta.vercel.app/api/products/getProduct");
       console.log("Products API Response:", productsResponse);
 
       // Extract products array from response
@@ -171,7 +171,7 @@ export default function SingleCustomerProductDetails() {
           }
 
           // Update product quantity in the database
-          await axios.put(`http://localhost:5000/api/products/update/${matchingProduct._id}`, {
+          await axios.put(`https://pos-backend-delta.vercel.app/api/products/update/${matchingProduct._id}`, {
             p_quantity: updatedQuantity,
           });
         } else {
@@ -181,7 +181,7 @@ export default function SingleCustomerProductDetails() {
       }
 
       // Update payment status
-      await axios.put(`http://localhost:5000/api/customerProduct/update/${customer._id}`, {
+      await axios.put(`https://pos-backend-delta.vercel.app/api/customerProduct/update/${customer._id}`, {
         paymentStatus: "paid",
       });
 
