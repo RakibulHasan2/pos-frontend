@@ -65,7 +65,7 @@ export default function CustomerList() {
         <div>
             <CommonTopNab />
             <div className="container mx-auto p-4">
-                <h2 className="text-xl font-bold mb-4">Customer List</h2>
+                <h2 className="text-xl font-bold mb-4">Sell List</h2>
 
                 {/* Filter Input */}
                 <div className="mb-4">
@@ -148,21 +148,6 @@ export default function CustomerList() {
                     </table>
                 )}
             </div>
-
-            {/* modal area */}
-            <dialog id="my_modal_3" className="modal">
-                <div className="w-[1000px] bg-white p-5 rounded-xl">
-                    <form method="dialog">
-                        {/* if there is a button in form, it will close the modal */}
-                        <div className='flex justify-end'>
-                            <button className="btn btn-sm btn-circle btn-ghost">✕</button>
-                        </div>
-                    </form>
-                    <div>
-                        sing product details area
-                    </div>
-                </div>
-            </dialog>
         </div>
     );
 }
