@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import successSound from ".././../../public/sounds/success.mp3"
 import errorSound from ".././../../public/sounds/error.mp3"
 import notifications from ".././../../public/sounds/notification.mp3"
+import { useNavigate } from "react-router";
 export default function Pos() {
     const [selectedCategory, setSelectedCategory] = useState("");
     const [products, setProducts] = useState([]);
@@ -21,6 +22,7 @@ export default function Pos() {
     // const [subtotal, setSubtotal] = useState(0);
     const [purchasedProducts, setPurchasedProducts] = useState([]);
     const [grandTotal, setGrandTotal] = useState(0);
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         customerName: "",
@@ -126,16 +128,6 @@ export default function Pos() {
         if (currentPage > 1) setCurrentPage(currentPage - 1);
     };
 
-
-
-    // // date 
-    // useEffect(() => {
-    //     // Get today's date in YYYY-MM-DD format
-    //     const today = new Date();
-    //     const formattedDate = today.toISOString().split("T")[0]; // Extract date part only
-    //     setSelectedDate(formattedDate); // Set the default date
-    // }, []);
-
     // Calculate grand total when purchasedProducts changes
     useEffect(() => {
         calculateGrandTotal();
@@ -234,6 +226,9 @@ export default function Pos() {
                 toast.success("Order submitted successfully!");
                 notificationSoundRef.current.play();
                 console.log(response.data)
+                setTimeout(() => {
+                    navigate("/customerList");
+                  }, 1000); // 1-second delay
                 setFormData({
                     customerName: "",
                     customerEmail: "",

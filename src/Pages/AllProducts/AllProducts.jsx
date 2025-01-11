@@ -260,7 +260,8 @@ export default function AllProducts() {
                     <p>{product?.p_category}</p>
                   </div>
                   <div className="w-[10%] pl-5">
-                    <p>{product?.p_quantity}</p>
+                    {product?.p_quantity !== 0 &&<p> {product?.p_quantity}</p>}
+                    {product?.p_quantity === 0 &&<p className="text-red-600">Stoke out</p>}
                   </div>
                   <div className="w-[10%] pl-2">
                     <p>{product?.p_price}</p>
@@ -350,7 +351,8 @@ export default function AllProducts() {
                 <p className="mt-3"><span className='font-bold'>Cost:</span> {singleProduct?.p_cost}</p>
                 <p className="mt-3"><span className='font-bold'>Quantity:</span> {singleProduct?.p_quantity}</p>
                 <p className="mt-3"><span className='font-bold'>tax:</span> {singleProduct?.tax}%</p>
-                <p className="mt-3"><span className='font-bold'>Status:</span> in stoke</p>
+               { singleProduct?.p_quantity !== 0 &&<p className="mt-3 text-green-600"><span className='font-bold '>Status:</span> in stoke</p>}
+               { singleProduct?.p_quantity === 0 &&<p className="mt-3 text-red-500"><span className='font-bold '>Status:</span> Stoke out</p>}
               </div>
             </div>
 

@@ -11,6 +11,7 @@ import Pos from "../Pages/Sale/Pos";
 import AddCategory from "../Pages/AddCategory/AddCategory";
 import CustomerList from "../Pages/CustomerList/CustomerList";
 import SingleCustomerProductDetails from "../Pages/CustomerList/SingleCustomerProductDetails";
+import People from "../Pages/CustomerList/People";
 
 const routes = createBrowserRouter([
     {
@@ -46,13 +47,16 @@ const routes = createBrowserRouter([
                 element:<CustomerList/>,
             },
             {
+                path: '/peopleList',
+                element:<People/>,
+            },
+            {
                 path: '/singleCustomerList/:id',
                 element:<SingleCustomerProductDetails/>,
                 loader:async ({params}) =>{
                     return fetch(`https://pos-backend-delta.vercel.app/api/customerProduct/single/${params?.id}`)
                 }
             },
-           
             {
                 path: '*',
                 element: <NotFound/>,
