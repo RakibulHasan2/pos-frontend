@@ -6,6 +6,7 @@ import { FaCaretRight, FaEye } from 'react-icons/fa6';
 import { NavLink } from 'react-router';
 import { AiTwotoneDelete } from 'react-icons/ai';
 import toast from 'react-hot-toast';
+import FinalLoader from './../../Shared/Loader/FinalLoader';
 
 
 export default function CustomerList() {
@@ -32,34 +33,34 @@ export default function CustomerList() {
     );
 
     if (tableLoading) {
-        return <p>Loading data...</p>;
+        return <FinalLoader/>;
     }
 
     const handleDelete = async (id) => {
         const confirmDelete = window.confirm("Are you sure you want to delete this?");
         if (!confirmDelete) return;
-    
+
         try {
-          const response = await fetch(`https://pos-backend-delta.vercel.app/api/customerProduct/delete/${id}`, {
-            method: "DELETE",
-          });
-    
-          if (response.ok) {
-            toast.success("Product deleted successfully!");
-            setTimeout(() => {
-                window.location.reload(); // Reload the page after 1 second
-              }, 1000);
-            // Optionally refresh or update the UI after deletion
-          } else {
-            const data = await response.json();
-            toast.error(`Failed to delete product: ${data.message}`);
-          }
-        // eslint-disable-next-line no-unused-vars
+            const response = await fetch(`https://pos-backend-delta.vercel.app/api/customerProduct/delete/${id}`, {
+                method: "DELETE",
+            });
+
+            if (response.ok) {
+                toast.success("Product deleted successfully!");
+                setTimeout(() => {
+                    window.location.reload(); // Reload the page after 1 second
+                }, 1000);
+                // Optionally refresh or update the UI after deletion
+            } else {
+                const data = await response.json();
+                toast.error(`Failed to delete product: ${data.message}`);
+            }
+            // eslint-disable-next-line no-unused-vars
         } catch (error) {
-          toast.error("An error occurred while deleting the product.");
+            toast.error("An error occurred while deleting the product.");
         }
-      };
-    
+    };
+
 
     return (
         <div>

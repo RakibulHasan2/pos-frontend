@@ -125,12 +125,13 @@ export default function AddCategory() {
   };
 
   if (tableLoading) {
-    return <div className="text-center mt-10">Loading table data...</div>;
+    return <FinalLoader />;
   }
 
   if (loading2 || !online) {
     return <FinalLoader />;
-}
+  }
+
   return (
     <div>
       <CommonTopNab />
