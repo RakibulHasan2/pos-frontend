@@ -6,7 +6,7 @@ export default {
   ],
   darkMode: 'class',
   theme: {
-    extend: {},
+    extend: {}, 
   },
   // eslint-disable-next-line no-undef
   plugins: [require('daisyui')],
