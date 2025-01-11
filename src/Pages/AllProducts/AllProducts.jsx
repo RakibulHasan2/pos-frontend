@@ -28,7 +28,7 @@ export default function AllProducts() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://pos-backend-delta.vercel.app/api/products/getProduct"
+          "http://localhost:5000/api/products/getProduct"
         );
         setProducts(response.data.products);
         setFilteredProducts(response.data.products);
@@ -47,7 +47,7 @@ export default function AllProducts() {
   // useEffect(() => {
   //   const fetchData = async () => {
   //     try {
-  //       const response = await axios.get("https://pos-backend-delta.vercel.app/api/products/getProduct");
+  //       const response = await axios.get("http://localhost:5000/api/products/getProduct");
   //       setProducts(response.data.products);
   //       setFilteredProducts(response.data.products);
 
@@ -72,7 +72,7 @@ export default function AllProducts() {
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
-          "https://pos-backend-delta.vercel.app/api/category/getCategories"
+          "http://localhost:5000/api/category/getCategories"
         );
         setCategories(response.data.categories);
       } catch (error) {
@@ -97,7 +97,7 @@ export default function AllProducts() {
   const handleViewProduct = async (id) => {
     try {
       const response = await axios.get(
-        `https://pos-backend-delta.vercel.app/api/products/single/${id}`
+        `http://localhost:5000/api/products/single/${id}`
       );
       setSingleProduct(response.data);
       document.getElementById("singleDetailsModal").showModal();
@@ -109,7 +109,7 @@ export default function AllProducts() {
   const handleUpdateProductFetch = async (id) => {
     try {
       const response = await axios.get(
-        `https://pos-backend-delta.vercel.app/api/products/single/${id}`
+        `http://localhost:5000/api/products/single/${id}`
       );
       setUpdateProduct(response.data);
       document.getElementById("updateModal").showModal();
@@ -147,7 +147,7 @@ export default function AllProducts() {
   
     try {
       const response = await axios.delete(
-        `https://pos-backend-delta.vercel.app/api/products/delete/${id}`
+        `http://localhost:5000/api/products/delete/${id}`
       );
   
       if (response.status === 200) {
@@ -260,7 +260,8 @@ export default function AllProducts() {
                     <p>{product?.p_category}</p>
                   </div>
                   <div className="w-[10%] pl-5">
-                    <p>{product?.p_quantity}</p>
+                    {product?.p_quantity !== 0 &&<p> {product?.p_quantity}</p>}
+                    {product?.p_quantity === 0 &&<p className="text-red-600">Stoke out</p>}
                   </div>
                   <div className="w-[10%] pl-2">
                     <p>{product?.p_price}</p>
@@ -350,7 +351,8 @@ export default function AllProducts() {
                 <p className="mt-3"><span className='font-bold'>Cost:</span> {singleProduct?.p_cost}</p>
                 <p className="mt-3"><span className='font-bold'>Quantity:</span> {singleProduct?.p_quantity}</p>
                 <p className="mt-3"><span className='font-bold'>tax:</span> {singleProduct?.tax}%</p>
-                <p className="mt-3"><span className='font-bold'>Status:</span> in stoke</p>
+               { singleProduct?.p_quantity !== 0 &&<p className="mt-3 text-green-600"><span className='font-bold '>Status:</span> in stoke</p>}
+               { singleProduct?.p_quantity === 0 &&<p className="mt-3 text-red-500"><span className='font-bold '>Status:</span> Stoke out</p>}
               </div>
             </div>
 
@@ -418,7 +420,7 @@ export default function AllProducts() {
                 // Send the PUT request
                 try {
                   const response = await fetch(
-                    `https://pos-backend-delta.vercel.app/api/products/update/${updateProduct._id}`,
+                    `http://localhost:5000/api/products/update/${updateProduct._id}`,
                     {
                       method: "PUT",
                       headers: {
