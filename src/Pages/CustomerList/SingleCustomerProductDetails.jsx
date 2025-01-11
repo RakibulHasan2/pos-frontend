@@ -220,8 +220,8 @@ export default function SingleCustomerProductDetails() {
         </div>
         <div id="print-area" className="container mx-auto p-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-bold mb-4">Customer Details</h2>
-
+            <h2 className="text-2xl font-bold mb-4">Sell Details</h2>
+            
           </div>
 
           <div className="bg-gray-100 p-4 rounded shadow-md">

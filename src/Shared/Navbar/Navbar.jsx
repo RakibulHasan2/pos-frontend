@@ -21,9 +21,12 @@ export default function Navbar() {
     {
       id: "Products",
       text: "Products",
-      icon: <AiOutlineProduct  size={20} />,
+      icon: <AiOutlineProduct size={20} />,
       submenu: [
-        { id: "AddCategory", text: "Category", icon: <MdOutlineCategory size={16} />, path: "/addCategory" },
+        // Filter out "AddCategory" if the user's role is "staff"
+        ...(user?.role !== "staff"
+          ? [{ id: "AddCategory", text: "Category", icon: <MdOutlineCategory size={16} />, path: "/addCategory" }]
+          : []),
         { id: "AddProduct", text: "Add Product", icon: <MdFormatListBulletedAdd size={16} />, path: "/addProduct" },
         { id: "AllProducts", text: "All Products", icon: <MdOutlinePlaylistAddCheck size={18} />, path: "/allProducts" },
       ],

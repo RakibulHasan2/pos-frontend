@@ -65,7 +65,7 @@ export default function CustomerList() {
         <div>
             <CommonTopNab />
             <div className="container mx-auto p-4">
-                <h2 className="text-xl font-bold mb-4">Customer List</h2>
+                <h2 className="text-xl font-bold mb-4">Sell List</h2>
 
                 {/* Filter Input */}
                 <div className="mb-4">
@@ -135,7 +135,7 @@ export default function CustomerList() {
                                             <li className="w-full border-b text-red-500">
                                                 <a
                                                     onClick={() => handleDelete(customer._id)}
-                                                    className="cursor-pointer flex items-center gap-2"
+                                                    className="cursor-pointer flex items-center  justify-center gap-2"
                                                 >
                                                     <AiTwotoneDelete className="text-2xl" /> Delete
                                                 </a>
