@@ -4,12 +4,13 @@ import CommonTopNab from '../../Shared/CommonTopNav/CommonTopNab';
 import useGetData from '../../Hooks/useGetData';
 import { FaCaretRight, FaEye } from 'react-icons/fa6';
 import { NavLink } from 'react-router';
-import { CiEdit } from 'react-icons/ci';
 import { AiTwotoneDelete } from 'react-icons/ai';
+import toast from 'react-hot-toast';
+
 
 export default function CustomerList() {
     const { data: categoriesData, isLoading: tableLoading } = useGetData(
-        "https://pos-backend-delta.vercel.app/api/customerProduct/getAllCustomerProducts"
+        "http://localhost:5000/api/customerProduct/getAllCustomerProducts"
     );
 
     const [filter, setFilter] = useState("");
@@ -33,6 +34,32 @@ export default function CustomerList() {
     if (tableLoading) {
         return <p>Loading data...</p>;
     }
+
+    const handleDelete = async (id) => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this?");
+        if (!confirmDelete) return;
+    
+        try {
+          const response = await fetch(`http://localhost:5000/api/customerProduct/delete/${id}`, {
+            method: "DELETE",
+          });
+    
+          if (response.ok) {
+            toast.success("Product deleted successfully!");
+            setTimeout(() => {
+                window.location.reload(); // Reload the page after 1 second
+              }, 1000);
+            // Optionally refresh or update the UI after deletion
+          } else {
+            const data = await response.json();
+            toast.error(`Failed to delete product: ${data.message}`);
+          }
+        // eslint-disable-next-line no-unused-vars
+        } catch (error) {
+          toast.error("An error occurred while deleting the product.");
+        }
+      };
+    
 
     return (
         <div>
@@ -105,11 +132,13 @@ export default function CustomerList() {
                                                     </a>
                                                 </li>
                                             </NavLink>
-                                            <li className="w-full border-b text-blue-500" >
-                                                <a><CiEdit className="text-2xl" /> Edit</a>
-                                            </li>
-                                            <li className="w-full border-b text-red-500"  >
-                                                <a><AiTwotoneDelete className="text-2xl" /> Delete</a>
+                                            <li className="w-full border-b text-red-500">
+                                                <a
+                                                    onClick={() => handleDelete(customer._id)}
+                                                    className="cursor-pointer flex items-center gap-2"
+                                                >
+                                                    <AiTwotoneDelete className="text-2xl" /> Delete
+                                                </a>
                                             </li>
                                         </ul>
                                     </div>

@@ -8,6 +8,7 @@ import { AiOutlineFullscreen, AiOutlineFullscreenExit } from 'react-icons/ai';
 import { NavLink, useLocation, useNavigate } from 'react-router';
 import { toast, ToastContainer } from 'react-toastify';
 import { FaUsersViewfinder } from 'react-icons/fa6';
+import { IoMdArrowRoundBack } from 'react-icons/io';
 
 export default function CommonTopNab() {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
@@ -55,10 +56,12 @@ const toggleDarkMode = () => {
 
 const location = useLocation();
     const isLocation = location.pathname === "/dashboard"
+    const isPos = location.pathname ==="/pos"
   return (
     <div className="w-full h-16 border-b flex items-center justify-between gap-5 pr-5">
     <p className={`ml-5 uppercase text-3xl font-semibold  text-blue-600`}>
      { isLocation &&  `Welcome ${user?.name}`}
+     {isPos && <NavLink to="/dashboard"><IoMdArrowRoundBack /></NavLink>}
     </p>
     <div className="flex gap-8">
     <NavLink to="/dashboard">
