@@ -48,6 +48,22 @@ export default function Login() {
     }
   };
 
+  const handleDemoLogin = (role) => {
+    if (role === 'admin') {
+      setFormData({
+        email: 'manager@gmail.com',
+        password: 'Manager1@',
+        role: 'manager',
+      });
+    } else if (role === 'staff') {
+      setFormData({
+        email: 'staff@gmail.com',
+        password: 'Staff1@',
+        role: 'staff',
+      });
+    }
+  };
+
   return (
     <div className="bg-register flex justify-center items-center">
       <form
@@ -144,6 +160,27 @@ export default function Login() {
             pauseOnHover
             theme="light"
           />
+        </div>
+
+        {/* Demo Login Buttons */}
+        <div className="mt-4">
+          <p className="text-center text-sm font-medium mb-2">Demo Login:</p>
+          <div className="flex space-x-2">
+            <button
+              type="button"
+              onClick={() => handleDemoLogin('admin')}
+              className="flex-1 bg-[#d1c62cea] hover:bg-[#79731dea] text-white font-medium py-2 px-4 rounded-3xl transition-all duration-300"
+            >
+              Admin
+            </button>
+            <button
+              type="button"
+              onClick={() => handleDemoLogin('staff')}
+              className="flex-1 bg-[#d1c62cea] hover:bg-[#79731dea] text-white font-medium py-2 px-4 rounded-3xl transition-all duration-300"
+            >
+              Staff
+            </button>
+          </div>
         </div>
 
 
