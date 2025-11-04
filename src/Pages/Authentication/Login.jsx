@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FaEye, FaEyeSlash, FaLock } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaLock, FaSpinner } from 'react-icons/fa';
 import { RiShieldUserFill } from 'react-icons/ri';
 import { SiGmail } from 'react-icons/si';
 import { NavLink, useNavigate } from 'react-router';
@@ -14,6 +14,7 @@ export default function Login() {
     password: '',
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,6 +23,7 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const response = await fetch('https://pos-backend-delta.vercel.app/api/users/login', {
         method: 'POST',
@@ -45,6 +47,8 @@ export default function Login() {
     } catch (error) {
       console.error('Error:', error);
       toast.error('An error occurred while logging in.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -144,8 +148,10 @@ export default function Login() {
         {/* Submit Button */}
         <div><button
           type="submit"
-          className="w-full bg-[#fcda6c] hover:bg-[#f5e091] transition-all duration-300 font-bold py-2 px-4 rounded-3xl"
+          disabled={isLoading}
+          className="w-full bg-[#fcda6c] hover:bg-[#f5e091] transition-all duration-300 font-bold py-2 px-4 rounded-3xl disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
         >
+          {isLoading && <FaSpinner className="animate-spin" />}
           Login
         </button>
           <ToastContainer
