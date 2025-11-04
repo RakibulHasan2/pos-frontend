@@ -73,7 +73,7 @@ export default function Navbar() {
               alt="Logo"
             />
             <p className={`overflow-hidden transition-all text-2xl font-bold rounded-xl ${expanded ? "block" : "hidden"
-                }`}>Positive It</p>
+                }`}>Demo POS</p>
             <button
               onClick={() => setExpanded((curr) => !curr)}
               className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100"
