@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
-import { FaEye, FaEyeSlash, FaLock, FaPhone, FaUser } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaLock, FaPhone, FaUser, FaSpinner } from 'react-icons/fa';
 import { RiShieldUserFill } from 'react-icons/ri';
 import { SiGmail } from 'react-icons/si';
 import { NavLink, useNavigate } from 'react-router';
@@ -16,6 +16,7 @@ export default function Register() {
         password: ''
     });
     const [showPassword, setShowPassword] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -24,6 +25,7 @@ export default function Register() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
         try {
             const response = await fetch('https://pos-backend-delta.vercel.app/api/users/create', {
                 method: 'POST',
@@ -46,6 +48,8 @@ export default function Register() {
         } catch (error) {
             console.error('Error:', error);
             toast.error('An error occurred while creating the user.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -169,8 +173,10 @@ export default function Register() {
                 <div>
                     <button
                         type="submit"
-                        className="w-full bg-[#fcda6c] hover:bg-[#f5e091] transition-all duration-300 font-bold py-2 px-4 rounded-3xl"
+                        disabled={isLoading}
+                        className="w-full bg-[#fcda6c] hover:bg-[#f5e091] transition-all duration-300 font-bold py-2 px-4 rounded-3xl disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                     >
+                        {isLoading && <FaSpinner className="animate-spin" />}
                         Register
                     </button>
                     <ToastContainer
